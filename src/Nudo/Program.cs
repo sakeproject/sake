@@ -1,4 +1,5 @@
-﻿using Nudo.Engine;
+﻿using System;
+using Nudo.Engine;
 
 namespace Nudo
 {
@@ -6,7 +7,11 @@ namespace Nudo
     {
         static void Main(string[] args)
         {
-            var engine = new NudoEngine(new NudoSettings());
+            var settings = new NudoSettings
+            {
+                Output = Console.Out
+            };
+            var engine = new NudoEngine(settings);
             engine.Execute(args);
         }
     }

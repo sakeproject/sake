@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using Shouldly;
+using Xunit;
 
 namespace Nudo.Engine.Tests
 {
@@ -8,6 +9,14 @@ namespace Nudo.Engine.Tests
         public void EngineCanBeCreated()
         {
             var engine = new NudoEngine(new NudoSettings());
+            engine.ShouldNotBe(null);
+        }
+
+        [Fact]
+        public void EngineWillLoadMakefileSparkFromCurrentDirectoryByDefault()
+        {
+            var engine = new NudoEngine(new NudoSettings());
+            engine.Execute();
         }
     }
 }

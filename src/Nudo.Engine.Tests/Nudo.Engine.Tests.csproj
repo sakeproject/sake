@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Shouldly">
+      <HintPath>..\..\packages\Shouldly.1.1.1.0\lib\35\Shouldly.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,10 +48,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Loader\DefaultLoaderTests.cs" />
+    <Compile Include="NudoEngineOptionsTests.cs" />
     <Compile Include="NudoEngineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Loader\Files\makefile.spark">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
