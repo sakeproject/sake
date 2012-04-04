@@ -1,0 +1,2 @@
+﻿
+${'running msbuild on ' + project}

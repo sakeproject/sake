@@ -1,0 +1,6 @@
+﻿
+
+<macro name="msbuild" project="string">
+  ${'running msbuild on ' + project}
+</macro>
+

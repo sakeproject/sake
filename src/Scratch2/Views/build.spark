@@ -1,0 +1,26 @@
+﻿
+<use namespace="System.IO"/>
+
+
+# target(test, target(compile, target(clean)));
+
+<macro name="clean">
+  ${"Removing all output"}
+</macro>
+
+
+<macro name="compile">
+  
+  // one example - calling a macro defined in _global.spark
+  ${msbuild('hello')}
+    
+  // another example - looping and inlining a partial named _msbuild.spark
+   <msbuild each="var project in Directory.GetFiles(@'C:\Projects\Mono')" />
+
+</macro>
+
+
+<macro name="test">
+
+</macro>
+
