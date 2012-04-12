@@ -1,0 +1,9 @@
+﻿
+#Default .Another
+  = 'ExecDefaultTask'
+
+#Another .YetAnother
+  = 'ExecAnotherTask'
+
+#YetAnother
+  = 'ExecYetAnotherTask'

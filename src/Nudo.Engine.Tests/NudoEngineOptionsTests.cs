@@ -1,15 +1,18 @@
-﻿using Shouldly;
+﻿using Autofac;
+using Shouldly;
 using Xunit;
 
 namespace Nudo.Engine.Tests
 {
     public class NudoEngineOptionsTests
     {
-        private NudoEngine _engine;
+        private readonly IContainer _container;
+        private readonly NudoEngine _engine;
 
         public NudoEngineOptionsTests()
         {
-            _engine = new NudoEngine(new NudoSettings());
+            _container = Starter.CreateContainer(new NudoSettings());
+            _engine = _container.Resolve<NudoEngine>();
         }
 
         [Fact]
@@ -29,15 +32,23 @@ namespace Nudo.Engine.Tests
         [Fact]
         public void PlainOldArgsBecomeTargets()
         {
-            _engine.Parse("this", "is", "a", "test").Targets.ShouldBe(new[]{"this", "is", "a", "test"});
+            _engine.Parse("this", "is", "a", "test").Targets.ShouldBe(new[] { "this", "is", "a", "test" });
         }
 
         [Fact]
         public void MakeFileMayBePassedIn()
         {
             var options = _engine.Parse("--file", "hello.txt", "foo");
-            options.Targets.ShouldBe(new[]{"foo"});
+            options.Targets.ShouldBe(new[] { "foo" });
             options.Makefile.ShouldBe("hello.txt");
+        }
+
+        [Fact]
+        public void CurrentDirectoryMayBeProvided()
+        {
+            _engine.Parse("-C", "build").ChangeDirectory.ShouldBe(new[] { "build" });
+            _engine.Parse("--directory", "build").ChangeDirectory.ShouldBe(new[] { "build" });
+            _engine.Parse("--directory", "build", "-C", "src").ChangeDirectory.ShouldBe(new[] { "build", "src" });
         }
     }
 }

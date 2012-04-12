@@ -1,5 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
+using Autofac;
 using Nudo.Engine;
+using Nudo.Engine.Loader;
+using Nudo.Engine.Logging;
+using Nudo.Engine.Runner;
 
 namespace Nudo
 {
@@ -9,10 +15,32 @@ namespace Nudo
         {
             var settings = new NudoSettings
             {
-                Output = Console.Out
+                Output = new ConsoleWriter()
             };
-            var engine = new NudoEngine(settings);
-            engine.Execute(args);
+            
+            using (var container = CreateContainer(settings))
+            {
+                var engine = container.Resolve<NudoEngine>();
+                try
+                {
+                    engine.Execute(args);
+                }
+                catch (Exception ex)
+                {
+                    container.Resolve<ILog>().Warn(ex.Message + Environment.NewLine + ex.StackTrace);
+                }
+            }
+        }
+
+        static IContainer CreateContainer(INudoSettings settings)
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterInstance(settings);
+            builder.RegisterType<NudoEngine>();
+            builder.RegisterType<DefaultLoader>().As<ILoader>();
+            builder.RegisterType<DefaultRunner>().As<IRunner>();
+            builder.RegisterType<DefaultLog>().As<ILog>();
+            return builder.Build();
         }
     }
 }

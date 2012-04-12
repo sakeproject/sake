@@ -1,0 +1,11 @@
+﻿
+
+#default 
+  -CallTarget("compile");
+
+
+#compile
+  ='Compile'
+
+#added target="compile"
+  ='HasBeenAdded'

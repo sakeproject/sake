@@ -1,29 +1,53 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using Nudo.Engine.Builder;
+using Nudo.Engine.Logging;
 using Spark;
+using Spark.FileSystem;
 
 namespace Nudo.Engine.Loader
 {
-    public class DefaultLoader
+    public class DefaultLoader : ILoader
     {
-        public IBuilder LoadBuilder(Options options)
+        private readonly ILog _log;
+
+        public DefaultLoader(ILog log)
+        {
+            _log = log;
+        }
+
+        public IBuilder Load(Options options)
         {
             var currentDirectory = Environment.CurrentDirectory;
+            var assemblyDirectory = Path.GetDirectoryName(typeof(NudoEngine).Assembly.Location);
 
             var settings = new SparkSettings()
-                .SetPageBaseType(typeof(BuilderBase));
+                .SetPageBaseType(typeof(BuilderBase))
+                .SetAutomaticEncoding(true)
+                .SetAttributeBehaviour(AttributeBehaviour.TextOriented)
+                .SetDebug(true);
+
+
 
             var engine = new SparkViewEngine(settings)
-            {
-                ViewFolder = new ViewFolder(currentDirectory)
-            };
+                             {
+                                 ViewFolder = new CombinedViewFolder(
+                                     new FileSystemViewFolder(currentDirectory),
+                                     new FileSystemViewFolder(assemblyDirectory)),
+                                 ExtensionFactory = new ExtensionFactory(),
+                             };
 
             var descriptor = new SparkViewDescriptor
             {
                 Templates = new[] { options.Makefile }
             };
 
-            return (IBuilder)engine.CreateInstance(descriptor);
+            var builder = (BuilderBase)engine.CreateInstance(descriptor);
+            builder.Output = new StringWriter();
+            builder.Log = _log;
+            builder.Render();
+            return builder;
         }
     }
 }

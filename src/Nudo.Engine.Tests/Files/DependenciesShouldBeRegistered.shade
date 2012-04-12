@@ -1,0 +1,12 @@
+﻿
+
+@{
+  RegisterTarget("default", "another", "Default dependency", () =>
+  {
+    Echo("This is default");
+  });
+}
+
+#another description="Another dependency"
+  ="This is another"
+
