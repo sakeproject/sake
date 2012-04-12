@@ -1,0 +1,7 @@
+
+
+- bad target name gives "no key in dictionary" error
+
+- compiler error far too large, put compiler messages to stderr and write 
+  larger test to addtl log file
+
