@@ -1,0 +1,37 @@
+
+-// Default target: when cmdline run without a target
+#default 
+  @{
+    CallTarget("clean");
+    CallTarget("test");
+  }
+
+
+-// Default lifecycle: target phases their dependencies
+
+
+#pre-clean
+#clean .pre-clean
+  -CallTarget('post-clean');
+#post-clean
+
+#validate
+#initialize .validate
+
+#compile .initialize
+
+#test-compile .compile
+#test .test-compile
+
+#package .compile
+
+#pre-integration-test
+#integration-test .package .pre-integration-test
+  -CallTarget("post-integration-test");
+#post-integration-test
+
+#verify .compile .test .package .integration-test
+
+#install .verify
+#deploy .verify
+

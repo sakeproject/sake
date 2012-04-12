@@ -1,0 +1,28 @@
+
+use namespace="System.Diagnostics"
+use namespace="System.IO"
+
+default workingdir="${Directory.GetCurrentDirectory()}"
+default commandline=""
+
+log info="Exec"
+log info="  program: ${program}"
+log info="  commandline: ${commandline}"
+log info="  workingdir: ${workingdir}"
+
+@{
+    var processStartInfo = new ProcessStartInfo {
+        UseShellExecute = false,
+        WorkingDirectory = workingdir,
+        FileName = program,
+        Arguments = commandline,
+    };
+
+    var process = Process.Start(processStartInfo);
+    process.WaitForExit();
+    if (process.ExitCode != 0)
+    {
+        throw new Exception(string.Format("Exit code {0} from {1}", process.ExitCode, program));
+    }
+}
+

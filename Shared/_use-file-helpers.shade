@@ -1,0 +1,75 @@
+
+use namespace="System"
+use namespace="System.Collections"
+use namespace="System.Collections.Generic"
+use namespace="System.Linq"
+
+functions
+  @{
+    _Files Files(string baseFolder)
+    {
+        return new _Files(baseFolder);
+    }
+    _Files Files(string baseFolder, string include)
+    {
+        return new _Files(baseFolder).Include(include);
+    }
+
+    class _Files : global::System.Collections.Generic.IEnumerable<string>
+    {
+        string _baseFolder;        
+        IList<Func<string, bool>> _include = new List<Func<string, bool>>();
+        IList<Func<string, bool>> _exclude = new List<Func<string, bool>>();
+
+        public _Files(string baseFolder)
+        {
+            _baseFolder = baseFolder;
+        }
+        public _Files Include(string pattern)
+        {
+            _include.Add(IsMatch(pattern));
+            return this;
+        }
+        public _Files Exclude(string pattern)
+        {
+            _exclude.Add(IsMatch(pattern));
+            return this;
+        }
+        Func<string,bool> IsMatch(string pattern) 
+        {
+            var regex = new System.Text.RegularExpressions.Regex(
+                pattern.Aggregate("^", (agg, ch) =>{
+                    if (ch == (char)'*') return agg + ".*";
+                    if (ch == (char)'?') return agg + ".";
+                    return agg + System.Text.RegularExpressions.Regex.Escape(ch.ToString());
+                }) + "$",
+                System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+            return path => regex.IsMatch(System.IO.Path.GetFileName(path));
+        }
+
+        global::System.Collections.IEnumerator global::System.Collections.IEnumerable.GetEnumerator()
+        {
+            return Scan().GetEnumerator();
+        }
+        global::System.Collections.Generic.IEnumerator<string> global::System.Collections.Generic.IEnumerable<string>.GetEnumerator()
+        {
+            return Scan().GetEnumerator();
+        }
+
+        global::System.Collections.Generic.IEnumerable<string> Scan()
+        {
+            foreach(var file in global::System.IO.Directory.GetFiles(_baseFolder)) 
+            {
+                if (_include.Any() && !_include.Any(match=>match(file)))
+                {
+                    continue;
+                }
+                if (_exclude.Any(match=>match(file)))
+                {
+                    continue;
+                }
+                yield return file;
+            }
+        }
+    }
+  }

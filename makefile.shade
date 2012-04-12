@@ -1,0 +1,28 @@
+
+
+use-standard-lifecycle
+use-file-helpers
+
+var version='0.1.0'
+
+var workingDir='${Directory.GetCurrentDirectory()}'
+var targetDir='${Path.Combine(workingDir, "target")}'
+var compileDir='${Path.Combine(targetDir, "bin")}'
+
+
+use namespace="System"
+use namespace="System.IO"
+
+#delete-target-folder target="clean"
+    test if='Directory.Exists(targetDir)'
+        log info='Deleting: ${targetDir}'
+        -Directory.Delete(targetDir, true);
+    else
+        log info='Already absent: ${targetDir}'
+
+#compile-sln target='compile'
+  msbuild projectFile='nudo.sln' outputDir='${compileDir}'
+
+#run-xunit target="test"
+  xunit each='var assemblyFile in Files(compileDir, "*.Tests.Dll")'
+
