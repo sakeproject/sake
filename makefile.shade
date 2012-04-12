@@ -21,7 +21,7 @@ use namespace="System.IO"
         log info='Already absent: ${targetDir}'
 
 #compile-sln target='compile'
-  msbuild projectFile='nudo.sln' outputDir='${compileDir}'
+  msbuild projectFile='sake.sln' outputDir='${compileDir}'
 
 #run-xunit target="test"
   xunit each='var assemblyFile in Files(compileDir, "*.Tests.Dll")'

@@ -1,3 +1,3 @@
 @echo off
-.\src\nudo\bin\debug\nudo.exe %*
+.\src\sake\bin\debug\sake.exe %*
 

@@ -2,23 +2,20 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9AC10F39-DE9E-46F3-926A-5A158AD322E5}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{0296FE05-EFEA-4ED2-8B82-62B7795CF309}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sake</RootNamespace>
-    <AssemblyName>Sake</AssemblyName>
+    <RootNamespace>Sake.Engine</RootNamespace>
+    <AssemblyName>Sake.Engine</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\Nudo\</SolutionDir>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -27,8 +24,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -37,11 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac">
-      <HintPath>..\..\packages\Autofac.2.6.1.841\lib\NET40\Autofac.dll</HintPath>
+    <Reference Include="NDesk.Options">
+      <HintPath>..\..\packages\NDesk.Options.0.2.1\lib\NDesk.Options.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Configuration">
-      <HintPath>..\..\packages\Autofac.2.6.1.841\lib\NET40\Autofac.Configuration.dll</HintPath>
+    <Reference Include="Spark, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prerelease\Spark\lib\Spark.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,18 +49,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConsoleWriter.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Builder\BuilderBase.cs" />
+    <Compile Include="Builder\IBuilder.cs" />
+    <Compile Include="Loader\FunctionsExtension.cs" />
+    <Compile Include="Logging\DefaultLog.cs" />
+    <Compile Include="Logging\ILog.cs" />
+    <Compile Include="Builder\Target.cs" />
+    <Compile Include="INudoSettings.cs" />
+    <Compile Include="Loader\DefaultLoader.cs" />
+    <Compile Include="Loader\ExtensionFactory.cs" />
+    <Compile Include="Loader\ILoader.cs" />
+    <Compile Include="Loader\TargetExtension.cs" />
+    <Compile Include="NudoEngine.cs" />
+    <Compile Include="NudoSettings.cs" />
+    <Compile Include="Options.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runner\DefaultRunner.cs" />
+    <Compile Include="Runner\IRunner.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Nudo.Engine\Sake.Engine.csproj">
-      <Project>{0296FE05-EFEA-4ED2-8B82-62B7795CF309}</Project>
-      <Name>Sake.Engine</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

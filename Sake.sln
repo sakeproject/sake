@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sake", "src\Nudo\Sake.csproj", "{9AC10F39-DE9E-46F3-926A-5A158AD322E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sake", "src\Sake\Sake.csproj", "{9AC10F39-DE9E-46F3-926A-5A158AD322E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sake.Engine", "src\Nudo.Engine\Sake.Engine.csproj", "{0296FE05-EFEA-4ED2-8B82-62B7795CF309}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sake.Engine", "src\Sake.Engine\Sake.Engine.csproj", "{0296FE05-EFEA-4ED2-8B82-62B7795CF309}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sake.Engine.Tests", "src\Nudo.Engine.Tests\Sake.Engine.Tests.csproj", "{610D7F7C-EA12-4B1E-8B08-429F838F40E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sake.Engine.Tests", "src\Sake.Engine.Tests\Sake.Engine.Tests.csproj", "{610D7F7C-EA12-4B1E-8B08-429F838F40E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{890674E8-6A33-4781-9978-4F616FE41C02}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,6 +16,22 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Welcome", ".Welcome", "{7452152B-F437-4719-8C73-9A098C5F4113}"
 	ProjectSection(SolutionItems) = preProject
 		todo.txt = todo.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{B84E4C5F-147B-488D-8D69-80EBDB405A79}"
+	ProjectSection(SolutionItems) = preProject
+		build.cmd = build.cmd
+		makefile.shade = makefile.shade
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{FC2E1D4F-C4B9-4D77-9DF0-51664B57CB85}"
+	ProjectSection(SolutionItems) = preProject
+		Shared\_exec.shade = Shared\_exec.shade
+		Shared\_log.shade = Shared\_log.shade
+		Shared\_msbuild.shade = Shared\_msbuild.shade
+		Shared\_use-file-helpers.shade = Shared\_use-file-helpers.shade
+		Shared\_use-standard-lifecycle.shade = Shared\_use-standard-lifecycle.shade
+		Shared\_xunit.shade = Shared\_xunit.shade
 	EndProjectSection
 EndProject
 Global
@@ -82,5 +98,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{890674E8-6A33-4781-9978-4F616FE41C02} = {7452152B-F437-4719-8C73-9A098C5F4113}
+		{B84E4C5F-147B-488D-8D69-80EBDB405A79} = {7452152B-F437-4719-8C73-9A098C5F4113}
+		{FC2E1D4F-C4B9-4D77-9DF0-51664B57CB85} = {B84E4C5F-147B-488D-8D69-80EBDB405A79}
 	EndGlobalSection
 EndGlobal
