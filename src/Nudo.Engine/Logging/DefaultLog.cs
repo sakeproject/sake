@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nudo.Engine.Logging
+namespace Sake.Engine.Logging
 {
     public class DefaultLog : ILog
     {

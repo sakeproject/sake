@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nudo", "src\Nudo\Nudo.csproj", "{9AC10F39-DE9E-46F3-926A-5A158AD322E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sake", "src\Nudo\Sake.csproj", "{9AC10F39-DE9E-46F3-926A-5A158AD322E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nudo.Engine", "src\Nudo.Engine\Nudo.Engine.csproj", "{0296FE05-EFEA-4ED2-8B82-62B7795CF309}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sake.Engine", "src\Nudo.Engine\Sake.Engine.csproj", "{0296FE05-EFEA-4ED2-8B82-62B7795CF309}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nudo.Engine.Tests", "src\Nudo.Engine.Tests\Nudo.Engine.Tests.csproj", "{610D7F7C-EA12-4B1E-8B08-429F838F40E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sake.Engine.Tests", "src\Nudo.Engine.Tests\Sake.Engine.Tests.csproj", "{610D7F7C-EA12-4B1E-8B08-429F838F40E9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{890674E8-6A33-4781-9978-4F616FE41C02}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Welcome", ".Welcome", "{74
 	ProjectSection(SolutionItems) = preProject
 		todo.txt = todo.txt
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spark", "..\spark\src\Spark\Spark.csproj", "{31929D34-1A68-4A6B-9D8A-B93037163A5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,21 +76,6 @@ Global
 		{610D7F7C-EA12-4B1E-8B08-429F838F40E9}.Retail|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{610D7F7C-EA12-4B1E-8B08-429F838F40E9}.Retail|Mixed Platforms.Build.0 = Release|Any CPU
 		{610D7F7C-EA12-4B1E-8B08-429F838F40E9}.Retail|x86.ActiveCfg = Release|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Release|x86.ActiveCfg = Release|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Retail|Any CPU.ActiveCfg = Retail|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Retail|Any CPU.Build.0 = Retail|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Retail|Mixed Platforms.ActiveCfg = Retail|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Retail|Mixed Platforms.Build.0 = Retail|Any CPU
-		{31929D34-1A68-4A6B-9D8A-B93037163A5A}.Retail|x86.ActiveCfg = Retail|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

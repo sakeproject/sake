@@ -8,8 +8,8 @@
     <ProjectGuid>{610D7F7C-EA12-4B1E-8B08-429F838F40E9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nudo.Engine.Tests</RootNamespace>
-    <AssemblyName>Nudo.Engine.Tests</AssemblyName>
+    <RootNamespace>Sake.Engine.Tests</RootNamespace>
+    <AssemblyName>Sake.Engine.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\..\Nudo\</SolutionDir>
@@ -81,6 +81,7 @@
     </None>
     <None Include="Files\makefile.shade">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Files\_shouldfindpartialincurrentfolder.shade">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -91,9 +92,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Nudo.Engine\Nudo.Engine.csproj">
+    <ProjectReference Include="..\Nudo.Engine\Sake.Engine.csproj">
       <Project>{0296FE05-EFEA-4ED2-8B82-62B7795CF309}</Project>
-      <Name>Nudo.Engine</Name>
+      <Name>Sake.Engine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

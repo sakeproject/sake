@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
-using Nudo.Engine.Loader;
-using Nudo.Engine.Logging;
+using Sake.Engine.Loader;
+using Sake.Engine.Logging;
 using Shouldly;
 using Xunit;
 
-namespace Nudo.Engine.Tests.Loader
+namespace Sake.Engine.Tests.Loader
 {
     public class DefaultLoaderTests
     {

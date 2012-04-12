@@ -1,4 +1,4 @@
-﻿namespace Nudo.Engine.Logging
+﻿namespace Sake.Engine.Logging
 {
     public interface ILog
     {

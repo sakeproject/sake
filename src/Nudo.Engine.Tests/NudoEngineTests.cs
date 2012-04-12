@@ -4,7 +4,7 @@ using Autofac;
 using Shouldly;
 using Xunit;
 
-namespace Nudo.Engine.Tests
+namespace Sake.Engine.Tests
 {
     public class NudoEngineTests
     {
