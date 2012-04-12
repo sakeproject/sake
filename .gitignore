@@ -4,3 +4,4 @@ _ReSharper*
 packages
 bin
 obj
+target
