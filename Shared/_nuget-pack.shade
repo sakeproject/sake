@@ -1,0 +1,15 @@
+
+default nugetPath='.nuget/nuget.exe'
+default configuration='Release'
+
+default workingdir='${Directory.GetCurrentDirectory()}'
+default outputDir=''
+default version=''
+default extra=''
+
+var commandline='pack "${nuspecFile}"'
+set commandline='${commandline} -OutputDirectory "${outputDir}"' if='!string.IsNullOrEmpty(outputDir)'
+set commandline='${commandline} -Version ${version}' if='!string.IsNullOrEmpty(version)'
+set commandline='${commandline} ${extra}' if='!string.IsNullOrEmpty(extra)'
+
+exec program="${nugetPath}"

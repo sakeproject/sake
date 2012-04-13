@@ -29,6 +29,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{FC2E1D
 		Shared\_exec.shade = Shared\_exec.shade
 		Shared\_log.shade = Shared\_log.shade
 		Shared\_msbuild.shade = Shared\_msbuild.shade
+		Shared\_nuget-pack.shade = Shared\_nuget-pack.shade
 		Shared\_use-file-helpers.shade = Shared\_use-file-helpers.shade
 		Shared\_use-standard-lifecycle.shade = Shared\_use-standard-lifecycle.shade
 		Shared\_xunit.shade = Shared\_xunit.shade

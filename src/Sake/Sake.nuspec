@@ -1,0 +1,14 @@
+﻿<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>sake</id>
+    <version>0.0.1</version>
+    <authors>Louis DeJardin</authors>
+    <description>CSharp-integrated build system</description>
+    <projectUrl>http://loudej.github.com/sake</projectUrl>
+  </metadata>
+  <files>
+    <file src="*.dll" target="tools" />
+    <file src="*.exe" target="tools" />
+    <file src="*.exe.config" target="tools" />
+  </files>
+</package>

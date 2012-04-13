@@ -4,6 +4,7 @@
   @{
     CallTarget("clean");
     CallTarget("test");
+    CallTarget("package");
   }
 
 

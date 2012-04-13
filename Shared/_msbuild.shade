@@ -2,7 +2,8 @@
 default msbuildPath='c:/Windows/Microsoft.NET/Framework/v4.0.30319/MSBuild.exe'
 default configuration='Release'
 
-default workingdir='${Path.GetDirectoryName(Path.Combine(Directory.GetCurrentDirectory(), projectFile))}'
+-//default workingdir='${Path.GetDirectoryName(Path.Combine(Directory.GetCurrentDirectory(), projectFile))}'
+default workingdir='${Directory.GetCurrentDirectory()}'
 default outputDir=''
 
 var OutDirPiece=''

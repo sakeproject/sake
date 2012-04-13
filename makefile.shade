@@ -5,24 +5,33 @@ use-file-helpers
 
 var version='0.1.0'
 
-var workingDir='${Directory.GetCurrentDirectory()}'
-var targetDir='${Path.Combine(workingDir, "target")}'
-var compileDir='${Path.Combine(targetDir, "bin")}'
+var baseDir='${Directory.GetCurrentDirectory()}'
+var targetDir='${Path.Combine(baseDir, "target")}'
+var testDir='${Path.Combine(targetDir, "test")}'
+var packageDir='${Path.Combine(targetDir, "package")}'
 
 
 use namespace="System"
 use namespace="System.IO"
 
 #delete-target-folder target="clean"
-    test if='Directory.Exists(targetDir)'
-        log info='Deleting: ${targetDir}'
-        -Directory.Delete(targetDir, true);
-    else
-        log info='Already absent: ${targetDir}'
+  test if='Directory.Exists(targetDir)'
+    log info='Deleting: ${targetDir}'
+    -Directory.Delete(targetDir, true);
+  else
+    log info='Already absent: ${targetDir}'
 
-#compile-sln target='compile'
-  msbuild projectFile='sake.sln' outputDir='${compileDir}'
+#compile-for-xunit target='test-compile'
+  msbuild projectFile='Sake.sln' outputDir='${testDir}'
 
 #run-xunit target="test"
-  xunit each='var assemblyFile in Files(compileDir, "*.Tests.Dll")'
+  for each='var assemblyFile in Files(testDir, "*.Tests.Dll")'
+    xunit
+
+#compile-sake target='compile'
+  msbuild projectFile='src\Sake\Sake.csproj' outputDir='${packageDir}'
+
+#run-nuget-pack target='package'
+  for each='var nuspecFile in Files(packageDir, "*.nuspec")' 
+    nuget-pack extra='-NoPackageAnalysis' outputDir='${targetDir}'
 
