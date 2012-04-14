@@ -12,8 +12,8 @@ use namespace="System.IO"
       }
   }
 
-#copy-should-find-and-move-files .reset
-  copy sourceDir="Data/Files" targetDir="Data/Copy/Temp" include="**/*.txt"
+#test-copy-should-find-and-move-files .reset
+  copy sourceDir="Data/Files" outputDir="Data/Copy/Temp" include="**/*.txt"
   @{
     var files = Files.BasePath("Data/Copy/Temp").Include("**/*.txt");
     files.Count().ShouldBe(4);

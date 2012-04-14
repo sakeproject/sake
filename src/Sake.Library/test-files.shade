@@ -45,3 +45,11 @@ use import="Files"
     files.ShouldContain(Path.Combine("Sub", "gamma.txt"));
     files.ShouldContain(Path.Combine("Sub", "delta.txt"));
   }
+
+#test-include-takes-multiple-patterns
+  @{
+    var files = Files.BasePath("Data/Files").Include("**/alpha.txt", "**/gamma.txt");
+    files.Count().ShouldBe(2);
+    files.ShouldContain(Path.Combine("alpha.txt"));
+    files.ShouldContain(Path.Combine("Sub", "gamma.txt"));
+  }
