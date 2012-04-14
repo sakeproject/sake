@@ -9,15 +9,15 @@ namespace Sake.Engine.Tests
     public class NudoEngineTests
     {
         private readonly IContainer _container;
-        private readonly NudoEngine _engine;
+        private readonly SakeEngine _engine;
         private readonly StringWriter _writer;
         string Output { get { return _writer.ToString(); } }
 
         public NudoEngineTests()
         {
             _writer = new StringWriter();
-            _container = Starter.CreateContainer(new NudoSettings {Output = _writer});
-            _engine = _container.Resolve<NudoEngine>();
+            _container = Starter.CreateContainer(new SakeSettings {Output = _writer});
+            _engine = _container.Resolve<SakeEngine>();
         }
 
         [Fact]
@@ -73,6 +73,14 @@ namespace Sake.Engine.Tests
             _engine.Execute("-C", "Files", "-f", "ShouldAddTargetAsDependencyToNamedTarget.shade");
             Output.ShouldContain("Compile");
             Output.ShouldContain("HasBeenAdded");
+        }
+
+
+        [Fact]
+        public void ShouldLoadFilesFromIncludeDir()
+        {
+            _engine.Execute("-C", "Files", "-f", "ShouldLoadFilesFromIncludeDir.shade", "-I", "AnotherFolder");
+            Output.ShouldContain("WasFoundInAnotherFolder");
         }
     }
 }

@@ -22,18 +22,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{B84E4C5F
 	ProjectSection(SolutionItems) = preProject
 		build.cmd = build.cmd
 		makefile.shade = makefile.shade
+		packages.config = packages.config
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{FC2E1D4F-C4B9-4D77-9DF0-51664B57CB85}"
-	ProjectSection(SolutionItems) = preProject
-		Shared\_exec.shade = Shared\_exec.shade
-		Shared\_log.shade = Shared\_log.shade
-		Shared\_msbuild.shade = Shared\_msbuild.shade
-		Shared\_nuget-pack.shade = Shared\_nuget-pack.shade
-		Shared\_use-file-helpers.shade = Shared\_use-file-helpers.shade
-		Shared\_use-standard-lifecycle.shade = Shared\_use-standard-lifecycle.shade
-		Shared\_xunit.shade = Shared\_xunit.shade
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sake.Library", "src\Sake.Library\Sake.Library.csproj", "{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +85,21 @@ Global
 		{610D7F7C-EA12-4B1E-8B08-429F838F40E9}.Retail|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{610D7F7C-EA12-4B1E-8B08-429F838F40E9}.Retail|Mixed Platforms.Build.0 = Release|Any CPU
 		{610D7F7C-EA12-4B1E-8B08-429F838F40E9}.Retail|x86.ActiveCfg = Release|Any CPU
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Debug|x86.ActiveCfg = Debug|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Debug|x86.Build.0 = Debug|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Release|Any CPU.ActiveCfg = Release|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Release|Mixed Platforms.Build.0 = Release|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Release|x86.ActiveCfg = Release|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Release|x86.Build.0 = Release|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Retail|Any CPU.ActiveCfg = Release|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Retail|Mixed Platforms.ActiveCfg = Release|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Retail|Mixed Platforms.Build.0 = Release|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Retail|x86.ActiveCfg = Release|x86
+		{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}.Retail|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -100,6 +107,5 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{890674E8-6A33-4781-9978-4F616FE41C02} = {7452152B-F437-4719-8C73-9A098C5F4113}
 		{B84E4C5F-147B-488D-8D69-80EBDB405A79} = {7452152B-F437-4719-8C73-9A098C5F4113}
-		{FC2E1D4F-C4B9-4D77-9DF0-51664B57CB85} = {B84E4C5F-147B-488D-8D69-80EBDB405A79}
 	EndGlobalSection
 EndGlobal

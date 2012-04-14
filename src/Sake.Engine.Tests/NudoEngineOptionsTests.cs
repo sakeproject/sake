@@ -7,12 +7,12 @@ namespace Sake.Engine.Tests
     public class NudoEngineOptionsTests
     {
         private readonly IContainer _container;
-        private readonly NudoEngine _engine;
+        private readonly SakeEngine _engine;
 
         public NudoEngineOptionsTests()
         {
-            _container = Starter.CreateContainer(new NudoSettings());
-            _engine = _container.Resolve<NudoEngine>();
+            _container = Starter.CreateContainer(new SakeSettings());
+            _engine = _container.Resolve<SakeEngine>();
         }
 
         [Fact]

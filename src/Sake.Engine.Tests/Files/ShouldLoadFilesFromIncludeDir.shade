@@ -1,0 +1,6 @@
+﻿
+
+#default .from-another-folder
+
+use file="FromAnotherFolder"
+

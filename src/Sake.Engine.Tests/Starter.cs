@@ -7,11 +7,11 @@ namespace Sake.Engine.Tests
 {
     public class Starter
     {
-        public static IContainer CreateContainer(INudoSettings settings)
+        public static IContainer CreateContainer(ISakeSettings settings)
         {
             var builder = new ContainerBuilder();
             builder.RegisterInstance(settings);
-            builder.RegisterType<NudoEngine>();
+            builder.RegisterType<SakeEngine>();
             builder.RegisterType<DefaultLoader>().As<ILoader>();
             builder.RegisterType<DefaultRunner>().As<IRunner>();
             builder.RegisterType<DefaultLog>().As<ILog>();

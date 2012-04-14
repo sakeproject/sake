@@ -10,11 +10,11 @@ namespace Sake.Engine.Tests.Loader
     public class DefaultLoaderTests
     {
         private readonly DefaultLoader _loader;
-        private NudoSettings _settings;
+        private SakeSettings _settings;
 
         public DefaultLoaderTests()
         {
-            _settings = new NudoSettings { Output = new StringWriter() };
+            _settings = new SakeSettings { Output = new StringWriter() };
             _loader = new DefaultLoader(new DefaultLog(_settings));
         }
 

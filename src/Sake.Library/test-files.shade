@@ -1,0 +1,47 @@
+﻿
+use assembly="Shouldly"
+use namespace="Shouldly"
+use namespace="System.Linq"
+use namespace="System.IO"
+use import="Files"
+
+-//use-file-helpers
+
+#test-shouldly-can-be-used
+  -"hello".ShouldBe("hello");
+  
+#test-includes-should-match-file-patterns
+  @{
+    var files = Files.Include("Data/Files/*.txt");
+    files.Count().ShouldBe(2);
+    files.ShouldContain(Path.Combine("Data", "Files", "alpha.txt"));
+    files.ShouldContain(Path.Combine("Data", "Files", "beta.txt"));
+  }
+
+#test-includes-should-recurse
+  @{
+    var files = Files.Include("Data/Files/**/*.txt");
+    files.Count().ShouldBe(4);
+    files.ShouldContain(Path.Combine("Data", "Files", "alpha.txt"));
+    files.ShouldContain(Path.Combine("Data", "Files", "beta.txt"));
+    files.ShouldContain(Path.Combine("Data", "Files", "Sub", "gamma.txt"));
+    files.ShouldContain(Path.Combine("Data", "Files", "Sub", "delta.txt"));
+  }
+
+#test-excludes-should-match-file-patterns
+  @{
+    var files = Files.Include("Data/Files/**/*.txt").Exclude("Data/Files/**/beta.*");
+    files.Count().ShouldBe(3);
+    files.ShouldContain(Path.Combine("Data", "Files", "alpha.txt"));
+    files.ShouldContain(Path.Combine("Data", "Files", "Sub", "gamma.txt"));
+    files.ShouldContain(Path.Combine("Data", "Files", "Sub", "delta.txt"));
+  }
+
+#test-base-path-should-not-be-in-result
+  @{
+    var files = Files.BasePath("Data/Files").Include("**/*.txt").Exclude("**/beta.*");
+    files.Count().ShouldBe(3);
+    files.ShouldContain(Path.Combine("alpha.txt"));
+    files.ShouldContain(Path.Combine("Sub", "gamma.txt"));
+    files.ShouldContain(Path.Combine("Sub", "delta.txt"));
+  }

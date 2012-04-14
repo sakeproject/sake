@@ -4,9 +4,9 @@ namespace Sake.Engine.Logging
 {
     public class DefaultLog : ILog
     {
-        private INudoSettings _settings;
+        private ISakeSettings _settings;
 
-        public DefaultLog(INudoSettings settings)
+        public DefaultLog(ISakeSettings settings)
         {
             _settings = settings;
         }

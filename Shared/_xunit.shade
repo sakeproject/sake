@@ -1,4 +1,0 @@
-
-default xunitPath='packages/xunit.runners.1.9.0.1566/tools/xunit.console.clr4.exe'
-
-exec program="${xunitPath}" commandline="${assemblyFile}" workingdir="${Path.GetDirectoryName(assemblyFile)}"

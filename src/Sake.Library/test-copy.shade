@@ -1,0 +1,26 @@
+﻿
+use assembly="Shouldly"
+use namespace="Shouldly"
+use namespace="System.Linq"
+use namespace="System.IO"
+
+#reset
+  @{
+      if (Directory.Exists(Path.Combine("Data", "Copy", "Temp")))
+      {
+        Directory.Delete(Path.Combine("Data", "Copy", "Temp"), true);
+      }
+  }
+
+#copy-should-find-and-move-files .reset
+  copy sourceDir="Data/Files" targetDir="Data/Copy/Temp" include="**/*.txt"
+  @{
+    var files = Files.BasePath("Data/Copy/Temp").Include("**/*.txt");
+    files.Count().ShouldBe(4);
+    files.ShouldContain(Path.Combine("alpha.txt"));
+    files.ShouldContain(Path.Combine("beta.txt"));
+    files.ShouldContain(Path.Combine("Sub", "gamma.txt"));
+    files.ShouldContain(Path.Combine("Sub", "delta.txt"));
+  }
+
+  

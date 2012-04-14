@@ -11,6 +11,7 @@ namespace Sake.Engine
             WriteOptionsDescriptions = _ => { };
             Targets = new List<string>();
             ChangeDirectory = new List<string>();
+            IncludeDirectory = new List<string>();
         }
 
         public bool ShowHelp { get; set; }
@@ -18,6 +19,7 @@ namespace Sake.Engine
         public int Verbose { get; set; }
 
         public IList<string> ChangeDirectory { get; set; }
+        public IList<string> IncludeDirectory { get; set; }
         public string Makefile { get; set; }
 
         public IList<string> Targets { get; set; }

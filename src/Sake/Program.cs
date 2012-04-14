@@ -13,14 +13,14 @@ namespace Sake
     {
         static void Main(string[] args)
         {
-            var settings = new NudoSettings
+            var settings = new SakeSettings
             {
                 Output = new ConsoleWriter()
             };
             
             using (var container = CreateContainer(settings))
             {
-                var engine = container.Resolve<NudoEngine>();
+                var engine = container.Resolve<SakeEngine>();
                 try
                 {
                     engine.Execute(args);
@@ -32,11 +32,11 @@ namespace Sake
             }
         }
 
-        static IContainer CreateContainer(INudoSettings settings)
+        static IContainer CreateContainer(ISakeSettings settings)
         {
             var builder = new ContainerBuilder();
             builder.RegisterInstance(settings);
-            builder.RegisterType<NudoEngine>();
+            builder.RegisterType<SakeEngine>();
             builder.RegisterType<DefaultLoader>().As<ILoader>();
             builder.RegisterType<DefaultRunner>().As<IRunner>();
             builder.RegisterType<DefaultLog>().As<ILog>();

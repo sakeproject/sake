@@ -2,7 +2,7 @@
 
 namespace Sake.Engine
 {
-    public interface INudoSettings
+    public interface ISakeSettings
     {
         TextWriter Output { get; }
     }

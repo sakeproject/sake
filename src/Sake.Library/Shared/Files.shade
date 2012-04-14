@@ -1,0 +1,62 @@
+
+use import="PathResolver"
+use namespace="System.Collections"
+
+functions
+  @{
+    _Files Files {get {return new _Files();}}
+    
+    class _Files : IEnumerable<string>
+    {
+        string _basePath;        
+        IList<string> _include = new List<string>();
+        IList<string> _exclude = new List<string>();
+
+        public _Files()
+        {
+            _basePath = Directory.GetCurrentDirectory();
+        }
+        public _Files BasePath(string basePath)
+        {
+            _basePath = Path.Combine(Directory.GetCurrentDirectory(), basePath.Replace("/","\\"));
+            return this;
+        }
+        public _Files Include(string pattern)
+        {
+            _include.Add(pattern.Replace("/","\\"));
+            return this;
+        }
+        public _Files Exclude(string pattern)
+        {
+            _exclude.Add(pattern.Replace("/","\\"));
+            return this;
+        }
+
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return Scan().GetEnumerator();
+        }
+        IEnumerator<string> IEnumerable<string>.GetEnumerator()
+        {
+            return Scan().GetEnumerator();
+        }
+
+        IEnumerable<string> Scan()
+        {
+          var exclude = _exclude
+            .SelectMany(pattern => PathResolver.PerformWildcardSearch(_basePath, pattern))
+            .Distinct()
+            .ToList();
+
+          var files = _include
+            .SelectMany(pattern => PathResolver.PerformWildcardSearch(_basePath, pattern))
+            .Distinct()
+            .Where(path => !exclude.Contains(path))
+            .Select(path => {if (path.StartsWith(_basePath)) {return path.Substring(_basePath.Length+1);} return path;})
+            .ToList();
+
+          return files;
+        }
+    }
+ }

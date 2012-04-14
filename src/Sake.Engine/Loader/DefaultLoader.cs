@@ -20,7 +20,7 @@ namespace Sake.Engine.Loader
         public IBuilder Load(Options options)
         {
             var currentDirectory = Environment.CurrentDirectory;
-            var assemblyDirectory = Path.GetDirectoryName(typeof(NudoEngine).Assembly.Location);
+            var assemblyDirectory = Path.GetDirectoryName(typeof(SakeEngine).Assembly.Location);
 
             var settings = new SparkSettings()
                 .SetPageBaseType(typeof(BuilderBase))
@@ -28,15 +28,18 @@ namespace Sake.Engine.Loader
                 .SetAttributeBehaviour(AttributeBehaviour.TextOriented)
                 .SetDebug(true);
 
-
+            IViewFolder viewFolder = new FileSystemViewFolder(currentDirectory);
+            foreach(var includeDir in options.IncludeDirectory)
+            {
+                viewFolder = new CombinedViewFolder(viewFolder, new FileSystemViewFolder(Path.Combine(currentDirectory, includeDir)));
+            }
+            viewFolder = new CombinedViewFolder(viewFolder, new FileSystemViewFolder(assemblyDirectory));
 
             var engine = new SparkViewEngine(settings)
-                             {
-                                 ViewFolder = new CombinedViewFolder(
-                                     new FileSystemViewFolder(currentDirectory),
-                                     new FileSystemViewFolder(assemblyDirectory)),
-                                 ExtensionFactory = new ExtensionFactory(),
-                             };
+                               {
+                                   ViewFolder = viewFolder,
+                                   ExtensionFactory = new ExtensionFactory(),
+                               };
 
             var descriptor = new SparkViewDescriptor
             {

@@ -6,13 +6,13 @@ using Sake.Engine.Runner;
 
 namespace Sake.Engine
 {
-    public class NudoEngine
+    public class SakeEngine
     {
-        private readonly INudoSettings _settings;
+        private readonly ISakeSettings _settings;
         private readonly ILoader _loader;
         private readonly IRunner _runner;
 
-        public NudoEngine(INudoSettings settings, ILoader loader, IRunner runner)
+        public SakeEngine(ISakeSettings settings, ILoader loader, IRunner runner)
         {
             _settings = settings;
             _loader = loader;
@@ -81,7 +81,9 @@ namespace Sake.Engine
                 .Add("v|verbose", "increase verbosity", v => ++options.Verbose)
                 .Add("h|?|help", "show this message and exit", v => options.ShowHelp = v != null)
                 .Add("f|file|makefile=", "read file as a makefile", v => options.Makefile = v)
-                .Add("C|directory=", "change currend directory", v => options.ChangeDirectory.Add(v));
+                .Add("C|directory=", "change current directory", v => options.ChangeDirectory.Add(v))
+                .Add("I|include-dir=", "specifies a directory to search for included files", v => options.IncludeDirectory.Add(v))
+                ;
 
             options.Targets = optionSet.Parse(args);
             options.WriteOptionsDescriptions = optionSet.WriteOptionDescriptions;
