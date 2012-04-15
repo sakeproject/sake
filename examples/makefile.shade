@@ -1,0 +1,28 @@
+
+use namespace='System'
+use namespace='System.IO'
+
+
+#default
+  log info='This is the examples directory'
+  log info='Run `sake about` to see description of all samples'
+  log info='Run `sake all` to run the default target in each subfolder'
+
+
+#about
+  log info='Showing information about every example folder'
+  for each='var folder in Directory.GetDirectories(Directory.GetCurrentDirectory())'
+    log info='-'
+    log info='=== ${Path.GetFileName(folder)} ==='
+    log info='-'
+    exec program='sake' workingdir='${folder}' commandline='about'
+
+
+#all
+  log info='Running the default target in each subfolder'
+  for each='var folder in Directory.GetDirectories(Directory.GetCurrentDirectory())'
+    log info='-'
+    log info='=== ${Path.GetFileName(folder)} ==='
+    log info='-'
+    exec program='sake' workingdir='${folder}'
+

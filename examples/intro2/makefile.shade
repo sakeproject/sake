@@ -1,0 +1,49 @@
+
+use namespace="System"
+use namespace="System.IO"
+use namespace="System.Linq"
+
+var baseDir='${Directory.GetCurrentDirectory()}'
+var targetDir='${Path.Combine(baseDir, "target")}'
+
+var aboutText='
+This example is the same as intro1/makefile.shade but uses
+element tags more often than c# code
+'
+
+
+#default description="First target, which is called when no targets are provided"
+  log info="No target specified - calling 'test'"
+  -CallTarget("test");
+  log info="For more information, run `sake about`"
+
+
+#clean description="Wipe out the ./target subfolder"
+  log info="cleaning"
+  test if="Directory.Exists(targetDir)"
+    log info='Deleting - " + targetDir'
+    -Directory.Delete(targetDir, true);
+
+
+#build .clean description="Add some files to the ./target subfolder"
+  log info="building"
+  test if="!Directory.Exists(targetDir)"
+    -Directory.CreateDirectory(targetDir);
+
+  for each="var index in Enumerable.Range(0, 10)"
+    var fileName='${Path.Combine(targetDir, "file_" + index + ".txt")}'
+    log info="Writing - ${fileName}"
+    -File.WriteAllText(fileName, "This is file " + index);
+
+
+#test .build description="Test that files exist in ./target subfolder :)"
+  log info="testing"
+  var files="${Directory.GetFiles(targetDir)}"
+  test if='(files.Length != 10)'
+    -throw new Exception("Expected 10 files");
+
+
+#about description="Provides info about this sample"
+  log info='${aboutText}'
+  log info='It has the following targets:'
+  log info='${target.Name} - ${target.Description}' each='var target in Targets.Values'
