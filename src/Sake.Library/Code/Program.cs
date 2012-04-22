@@ -9,7 +9,6 @@ namespace Sake.Library
     {
         static void Main(string[] args)
         {
-            
             XmlNode results;
             var settings = new XmlWriterSettings
             {
@@ -48,10 +47,6 @@ namespace Sake.Library
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("OK");
             }
-
-            Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("Press enter to exit");
-            Console.ReadLine();
         }
     }
 }
