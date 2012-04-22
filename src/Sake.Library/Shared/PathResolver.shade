@@ -47,13 +47,25 @@ functions
 
         private static Regex WildcardToRegex(string wildcard)
         {
-            return new Regex('^'
-               + Regex.Escape(wildcard)
-                .Replace(@"\*\*\\", ".*") //For recursive wildcards \**\, include the current directory.
-                .Replace(@"\*\*", ".*") // For recursive wildcards that don't end in a slash e.g. **.txt would be treated as a .txt file at any depth
-                .Replace(@"\*", @"[^\\]*(\\)?") // For non recursive searches, limit it any character that is not a directory separator
-                .Replace(@"\?", ".") // ? translates to a single any character
-               + '$', RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture);
+            var match = Regex.Escape(wildcard);
+            
+            if (Path.DirectorySeparatorChar == (char)'/')
+            {
+                match = match
+                    .Replace(@"\*\*/", ".*") //For recursive wildcards /**/, include the current directory.
+                    .Replace(@"\*\*", ".*") // For recursive wildcards that don't end in a slash e.g. **.txt would be treated as a .txt file at any depth
+                    .Replace(@"\*", @"[^/]*(/)?") // For non recursive searches, limit it any character that is not a directory separator
+                    .Replace(@"\?", "."); // ? translates to a single any character
+            }
+            else
+            {
+                match = match
+                    .Replace(@"\*\*\\", ".*") //For recursive wildcards \**\, include the current directory.
+                    .Replace(@"\*\*", ".*") // For recursive wildcards that don't end in a slash e.g. **.txt would be treated as a .txt file at any depth
+                    .Replace(@"\*", @"[^\\]*(\\)?") // For non recursive searches, limit it any character that is not a directory separator
+                    .Replace(@"\?", "."); // ? translates to a single any character
+            }
+            return new Regex('^' + match + '$', RegexOptions.IgnoreCase | RegexOptions.ExplicitCapture);
         }
 
         /*
@@ -103,7 +115,7 @@ functions
             }
 
             // Starting from the base path, enumerate over all files and match it using the wildcard expression provided by the user.
-            return from file in Directory.EnumerateFiles(normalizedBasePath, "*.*", searchOption)
+            return from file in Directory.GetFiles(normalizedBasePath, "*.*", searchOption)
                    where searchRegex.IsMatch(file)
                    select file;
         }
