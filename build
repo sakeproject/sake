@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mono --runtime=v4.0 "./.nuget/nuget.exe" install ./packages.config -o packages
+mono "./packages/Sake.0.1.0-alpha/tools/Sake.exe" -I "src/Sake.Library/Shared" "$@" 
+
