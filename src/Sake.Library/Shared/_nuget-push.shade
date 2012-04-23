@@ -5,8 +5,8 @@ default workingdir='${Directory.GetCurrentDirectory()}'
 default apiKey='${Environment.GetEnvironmentVariable("APIKEY")}'
 default extra=''
 
-var commandline='push "${nupkgFile}"'
-set commandline='${commandline} -ApiKey ${apiKey}' if='!string.IsNullOrEmpty(apiKey)'
-set commandline='${commandline} ${extra}' if='!string.IsNullOrEmpty(extra)'
+var nugetArgs='push "${nupkgFile}"'
+set nugetArgs='${nugetArgs} -ApiKey ${apiKey}' if='!string.IsNullOrEmpty(apiKey)'
+set nugetArgs='${nugetArgs} ${extra}' if='!string.IsNullOrEmpty(extra)'
 
-exec program="${nugetPath}"
+exec-clr program="${nugetPath}" commandline="${nugetArgs}"

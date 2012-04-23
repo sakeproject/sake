@@ -7,9 +7,9 @@ default outputDir=''
 default version=''
 default extra=''
 
-var commandline='pack "${nuspecFile}"'
-set commandline='${commandline} -OutputDirectory "${outputDir}"' if='!string.IsNullOrEmpty(outputDir)'
-set commandline='${commandline} -Version ${version}' if='!string.IsNullOrEmpty(version)'
-set commandline='${commandline} ${extra}' if='!string.IsNullOrEmpty(extra)'
+var nugetArgs='pack "${nuspecFile}"'
+set nugetArgs='${nugetArgs} -OutputDirectory "${outputDir}"' if='!string.IsNullOrEmpty(outputDir)'
+set nugetArgs='${nugetArgs} -Version ${version}' if='!string.IsNullOrEmpty(version)'
+set nugetArgs='${nugetArgs} ${extra}' if='!string.IsNullOrEmpty(extra)'
 
-exec program="${nugetPath}"
+exec-clr program="${nugetPath}" commandline="${nugetArgs}"
