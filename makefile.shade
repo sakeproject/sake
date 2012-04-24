@@ -21,32 +21,34 @@ var packageDir='${Path.Combine(targetDir, "package")}'
     log info='Already absent: ${targetDir}'
 
 
-#compile-for-xunit target='test-compile'
+#compile-sake target='compile' description='Compile primary project'
+  build projectFile='src/Sake/Sake.csproj' outputDir='${packageDir}'
+  copy sourceDir='src/Sake.Library/Shared' outputDir='${packageDir}/Shared' overwrite='${true}'
+
+
+#compile-for-xunit target='test-compile' description='Compile entire solution for testing'
   build projectFile='Sake.sln' outputDir='${testDir}'
 
 
-#run-xunit target="test"
+#run-xunit target="test" description='Run xunit tests'
   copy sourceDir='${testDir}' include='xunit.dll' outputDir='packages/xunit.runners.1.9.0.1566/tools' overwrite='${true}'
   for each='var file in Files.BasePath(testDir).Include("*.Tests.dll", "Sake.Library.exe")'
     xunit assemblyFile='${Path.Combine(testDir, file)}'
 
 
-#compile-sake target='compile'
-  build projectFile='src/Sake/Sake.csproj' outputDir='${packageDir}'
-  copy sourceDir='src/Sake.Library/Shared' outputDir='${packageDir}/Shared' overwrite='${true}'
-
-
-#run-nuget-pack target='package'
+#run-nuget-pack target='package' description='Create NuGet packages'
   for each='var file in Files.Include("target/package/**/*.nuspec")'
     log info='Packaging ${file}'
     nuget-pack nuspecFile='${file}' extra='-NoPackageAnalysis' outputDir='${targetDir}'
 
 
-#install-nupkgs target='install'
+#install-nupkgs target='install' description='Copy NuGet packages to local repo'
   var outputDir='${Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%\\.nuget")}'
   copy sourceDir='${targetDir}' include='*.nupkg' overwrite='${true}'
 
 
-#push-nupkgs target='deploy'
+#push-nupkgs target='deploy' description='Upload NuGet packages to gallery'
   nuget-push each='var nupkgFile in Files.Include(targetDir + "/*.nupkg")' 
+
+
 

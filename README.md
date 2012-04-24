@@ -39,7 +39,7 @@ This is another nice technique if you want to use Sake in your project and don't
 
 #### build.cmd
     @echo off
-    ".nuget\nuget.exe" install -OutputDirectory packages .\packages.config
+    ".nuget\NuGet.exe" install -OutputDirectory packages .\packages.config
     "packages\Sake.0.1.0-alpha\tools\sake.exe" %*
 
 #### makefile.shade

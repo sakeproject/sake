@@ -27,9 +27,9 @@ namespace Sake.Engine
             }
             catch (OptionException ex)
             {
-                _settings.Output.Write("Nudo: ");
+                _settings.Output.Write("Sake: ");
                 _settings.Output.WriteLine(ex.Message);
-                _settings.Output.WriteLine("Try 'Nudo --help' for more information.");
+                _settings.Output.WriteLine("Try 'Sake --help' for more information.");
             }
         }
 
@@ -92,16 +92,11 @@ namespace Sake.Engine
 
         public void ShowHelp(Options options)
         {
-            _settings.Output.WriteLine("Usage: Nudo [OPTIONS]+ [target]+");
+            _settings.Output.WriteLine("Usage: Sake [OPTIONS]+ [target]+");
             _settings.Output.WriteLine();
             _settings.Output.WriteLine("Options:");
             options.WriteOptionsDescriptions(_settings.Output);
         }
 
-    }
-
-    public interface INudoContainer
-    {
-        T Get<T>();
     }
 }

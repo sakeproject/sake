@@ -6,14 +6,14 @@ using Xunit;
 
 namespace Sake.Engine.Tests
 {
-    public class NudoEngineTests
+    public class SakeEngineTests
     {
         private readonly IContainer _container;
         private readonly SakeEngine _engine;
         private readonly StringWriter _writer;
         string Output { get { return _writer.ToString(); } }
 
-        public NudoEngineTests()
+        public SakeEngineTests()
         {
             _writer = new StringWriter();
             _container = Starter.CreateContainer(new SakeSettings {Output = _writer});

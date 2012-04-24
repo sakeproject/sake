@@ -14,8 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".Welcome", ".Welcome", "{74
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{890674E8-6A33-4781-9978-4F616FE41C02}"
 	ProjectSection(SolutionItems) = preProject
-		.nuget\nuget.exe = .nuget\nuget.exe
-		.nuget\nuget.targets = .nuget\nuget.targets
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{B84E4C5F-147B-488D-8D69-80EBDB405A79}"

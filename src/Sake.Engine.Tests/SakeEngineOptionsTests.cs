@@ -4,12 +4,12 @@ using Xunit;
 
 namespace Sake.Engine.Tests
 {
-    public class NudoEngineOptionsTests
+    public class SakeEngineOptionsTests
     {
         private readonly IContainer _container;
         private readonly SakeEngine _engine;
 
-        public NudoEngineOptionsTests()
+        public SakeEngineOptionsTests()
         {
             _container = Starter.CreateContainer(new SakeSettings());
             _engine = _container.Resolve<SakeEngine>();
