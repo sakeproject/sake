@@ -6,10 +6,14 @@ functions
   @{
     _Files Files {get {return new _Files(Log);}}
     
+    static string ReplaceDirectorySeparatorChar(string path)
+    {
+        return path.Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
+    }
     
     class _Files : IEnumerable<string>
     {
-        string _basePath;        
+        string _basePath;
         IList<string> _include = new List<string>();
         IList<string> _exclude = new List<string>();
 
@@ -23,7 +27,9 @@ functions
         
         public _Files BasePath(string basePath)
         {
-            _basePath = Path.Combine(Directory.GetCurrentDirectory(), basePath);
+            _basePath = Path.Combine(
+                Directory.GetCurrentDirectory(), 
+                ReplaceDirectorySeparatorChar(basePath));
             return this;
         }
         
@@ -31,7 +37,7 @@ functions
         {
             foreach(var pattern in patterns) 
             {
-                _include.Add(pattern);
+                _include.Add(ReplaceDirectorySeparatorChar(pattern));
             }
             return this;
         }
@@ -40,7 +46,7 @@ functions
         {
             foreach(var pattern in patterns) 
             {
-                _exclude.Add(pattern);
+                _exclude.Add(ReplaceDirectorySeparatorChar(pattern));
             }
             return this;
         }
@@ -57,19 +63,25 @@ functions
 
         IEnumerable<string> Scan()
         {
-          var exclude = _exclude
-            .SelectMany(pattern => PathResolver.PerformWildcardSearch(_basePath, pattern))
-            .Distinct()
-            .ToList();
+            var exclude = _exclude
+                .SelectMany(pattern => PathResolver.PerformWildcardSearch(_basePath, pattern))
+                .Distinct()
+                .ToList();
 
-          var files = _include
-            .SelectMany(pattern => PathResolver.PerformWildcardSearch(_basePath, pattern))
-            .Distinct()
-            .Where(path => !exclude.Contains(path))
-            .Select(path => {if (path.StartsWith(_basePath)) {return path.Substring(_basePath.Length + 1);} return path;})
-            .ToList();
+            var include = _include;
+            if (!include.Any())
+            {
+                include = new[]{ReplaceDirectorySeparatorChar("**/*")};
+            }
 
-          return files;
+            var files = include
+                .SelectMany(pattern => PathResolver.PerformWildcardSearch(_basePath, pattern))
+                .Distinct()
+                .Where(path => !exclude.Contains(path))
+                .Select(path => {if (path.StartsWith(_basePath)) {return path.Substring(_basePath.Length + 1);} return path;})
+                .ToList();
+
+            return files;
         }
     }
  }
