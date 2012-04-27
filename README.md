@@ -9,6 +9,10 @@ This also a way you can see Sake in action - it downloads itself from the Nuget 
 
     git clone https://github.com/loudej/sake.git && cd sake && build
 
+Or to build on Mac or Linux
+
+    git clone https://github.com/loudej/sake.git && cd sake && ./build
+
 
 ## Getting Sake on your machine
 ### Via Chocolatey
