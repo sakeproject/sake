@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Sake : The make system powered by C#" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Sake</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/sakeproject/sake">View on GitHub</a>
+
+          <h1 id="project_title">Sake</h1>
+          <h2 id="project_tagline">The make system powered by C#</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/sakeproject/sake/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/sakeproject/sake/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>CS Make - Sake</h1>
+
+<p>Welcome to Sake, a C# language enabled make system.</p>
+
+<h2>Getting Sake from source and building</h2>
+
+<p>This also a way you can see Sake in action - it downloads itself from the Nuget gallery to build.</p>
+
+<pre><code>git clone https://github.com/loudej/sake.git &amp;&amp; cd sake &amp;&amp; build
+</code></pre>
+
+<p>Or to build on Mac or Linux</p>
+
+<pre><code>git clone https://github.com/loudej/sake.git &amp;&amp; cd sake &amp;&amp; ./build
+</code></pre>
+
+<h2>Getting Sake on your machine</h2>
+
+<h3>Via Chocolatey</h3>
+
+<p>This is a convenient if you want to run <code>sake</code> in any directory from a command line.</p>
+
+<pre><code>cinst sake -pre
+</code></pre>
+
+<p>First, you'll need to get chocolatey if you don't already have it. From a Package Manager Console</p>
+
+<pre><code>Install-Package chocolatey
+Initialize-Chocolatey
+Uninstall-Package chocolatey
+</code></pre>
+
+<p>Or there are other ways of getting chocolatey, see <a href="https://github.com/chocolatey/chocolatey/wiki/Installation">https://github.com/chocolatey/chocolatey/wiki/Installation</a></p>
+
+<h2>Getting Sake in your project's build</h2>
+
+<h3>Via build.cmd bootstrapper</h3>
+
+<p>This is another nice technique if you want to use Sake in your project and don't to need people to install anything machine-wide. What you do is use Nuget.exe to download SAKE from the gallery in a pre-build step. This takes three files, <code>package.config</code>, <code>build.cmd</code>, and <code>makefile.shade</code>.</p>
+
+<h4>package.config</h4>
+
+<pre><code>&lt;packages&gt;
+  &lt;package id="Sake" version="0.1.0-alpha" /&gt;
+  &lt;!-- add other packages used as build tools, like nunit or xunit-runner --&gt;
+&lt;/packages&gt;
+</code></pre>
+
+<h4>build.cmd</h4>
+
+<pre><code>@echo off
+".nuget\NuGet.exe" install -OutputDirectory packages .\packages.config
+"packages\Sake.0.1.0-alpha\tools\sake.exe" %*
+</code></pre>
+
+<h4>makefile.shade</h4>
+
+<pre><code>#default
+  log info="Hello world!"
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Sake maintained by <a href="https://github.com/sakeproject">sakeproject</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
