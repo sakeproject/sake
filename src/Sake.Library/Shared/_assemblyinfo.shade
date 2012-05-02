@@ -1,0 +1,16 @@
+
+default updateFile=''
+default assemblyVersion=''
+default assemblyFileVersion='${assemblyVersion}'
+
+use import='Regex'
+
+update-file if='!string.IsNullOrEmpty(updateFile)'
+  @{
+    if (!string.IsNullOrWhiteSpace(assemblyVersion))
+      updateText = RegexReplace(updateText, "AssemblyVersion\\([^\\)]*\\)", "AssemblyVersion(\"" + assemblyVersion + "\")");
+      
+    if (!string.IsNullOrWhiteSpace(assemblyFileVersion))
+      updateText = RegexReplace(updateText, "AssemblyFileVersion\\([^\\)]*\\)", "AssemblyFileVersion(\"" + assemblyFileVersion + "\")");
+  }
+

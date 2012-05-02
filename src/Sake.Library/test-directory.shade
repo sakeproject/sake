@@ -1,0 +1,23 @@
+﻿
+use assembly="Shouldly"
+use namespace="Shouldly"
+use namespace="System.IO"
+
+#test-can-create-directory
+  directory create='Data/CanCreateDirectory'
+  -Directory.Exists("Data/CanCreateDirectory").ShouldBe(true);
+  
+#test-create-directory-on-existing-directory-is-okay
+  directory create='Data/CanCreateExistingDirectory'
+  -Directory.Exists("Data/CanCreateExistingDirectory").ShouldBe(true);
+  directory create='Data/CanCreateExistingDirectory'
+
+#test-can-delete-directory
+  directory create='Data/CanDeleteDirectory'
+  -Directory.Exists("Data/CanDeleteDirectory").ShouldBe(true);
+  directory delete='Data/CanDeleteDirectory'
+  -Directory.Exists("Data/CanDeleteDirectory").ShouldBe(false);
+  
+#test-delete-directory-on-missing-directory-is-okay
+  -Directory.Exists("Data/CanDeleteMissingDirectory").ShouldBe(false);
+  directory delete='Data/CanDeleteMissingDirectory'
