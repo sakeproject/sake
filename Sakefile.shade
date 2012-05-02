@@ -20,6 +20,7 @@ var packageDir='${Path.Combine(targetDir, "package")}'
   else
     log info='Already absent: ${targetDir}'
 
+#clean-needed .clean target="compile"
 
 #compile-sake target='compile' description='Compile primary project'
   build projectFile='src/Sake/Sake.csproj' outputDir='${packageDir}'
