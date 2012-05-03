@@ -1,0 +1,11 @@
+﻿
+use assembly="Shouldly"
+use namespace="Shouldly"
+
+#test-should-update-assembly-info
+  -System.IO.File.Copy('Data/Asseminfo/versions.txt', 'Data/Asseminfo/dupe.txt', true);
+  assemblyinfo updateFile='Data/Asseminfo/dupe.txt' assemblyVersion='6.3.4'
+  var contents='${System.IO.File.ReadAllText('Data/Asseminfo/dupe.txt')}'
+  -contents.ShouldContain("AssemblyVersion(\"6.3.4\")");
+  -contents.ShouldContain("AssemblyFileVersion(\"6.3.4\")");
+  

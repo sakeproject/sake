@@ -6,7 +6,9 @@ use namespace="System"
 use namespace="System.IO"
 use import="Files"
 
-var version='0.1.0-alpha'
+var version='0.1.0'
+var versionFull='${version}-alpha-5'
+
 var baseDir='${Directory.GetCurrentDirectory()}'
 var targetDir='${Path.Combine(baseDir, "target")}'
 var testDir='${Path.Combine(targetDir, "test")}'
@@ -20,6 +22,8 @@ var packageDir='${Path.Combine(targetDir, "package")}'
   else
     log info='Already absent: ${targetDir}'
 
+#update-assemblyinfo target='initialize'
+  assemblyinfo each='var updateFile in Files.Include("src/**/AssemblyInfo.cs")' assemblyVersion='${version}' assemblyInformationalVersion='${versionFull}'
 
 #compile-sake target='compile' description='Compile primary project'
   build projectFile='src/Sake/Sake.csproj' outputDir='${packageDir}'
@@ -31,9 +35,9 @@ var packageDir='${Path.Combine(targetDir, "package")}'
 
 
 #run-xunit target="test" description='Run xunit tests'
-  copy sourceDir='${testDir}' include='xunit.dll' outputDir='packages/xunit.runners.1.9.0.1566/tools' overwrite='${true}'
+  -//copy sourceDir='${testDir}' include='xunit.dll' outputDir='packages/xunit.runners.1.9.0.1566/tools' overwrite='${true}'
   for each='var file in Files.BasePath(testDir).Include("*.Tests.dll", "Sake.Library.exe")'
-    xunit assemblyFile='${Path.Combine(testDir, file)}'
+    xunit testFile='${Path.Combine(testDir, file)}'
 
 
 #run-nuget-pack target='package' description='Create NuGet packages'
@@ -48,7 +52,7 @@ var packageDir='${Path.Combine(targetDir, "package")}'
 
 
 #push-nupkgs target='deploy' description='Upload NuGet packages to gallery'
-  nuget-push each='var nupkgFile in Files.Include(targetDir + "/*.nupkg")' 
+  nuget-push each='var nupkgFile in Files.Include("target/*.nupkg")'
 
 
 

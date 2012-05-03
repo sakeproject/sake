@@ -17,7 +17,8 @@
 #post-clean
 
 #validate
-#initialize .validate
+
+#initialize .clean .validate
 
 #compile .initialize
 

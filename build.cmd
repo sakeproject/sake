@@ -1,4 +1,10 @@
-:@echo off
+@echo off
+cd %~dp0
+
 set EnableNuGetPackageRestore=true
-"%~dp0.nuget\NuGet.exe" install -OutputDirectory packages .\packages.config
-"%~dp0packages\Sake.0.1.0-alpha\tools\Sake.exe" -C %~dp0 -I src\Sake.Library\Shared %*
+".nuget\NuGet.exe" install Sake -pre -o packages
+
+for /f "tokens=*" %%G in ('dir /AD /ON /B "packages\Sake.*"') do set __sake__=%%G
+"packages\%__sake__%\tools\Sake.exe" -f Sakefile.shade -I src\Sake.Library\Shared %*
+set __sake__=
+

@@ -1,5 +1,20 @@
 
-default xunitPath='packages/xunit.runners.1.9.0.1566/tools/xunit.console.clr4.exe'
+default xunitVersion='1.9.0.1566'
+default xunitProgram='packages/xunit.runners.${xunitVersion}/tools/xunit.console.clr4.exe'
+default extra=''
 
-default workingdir='${Directory.GetCurrentDirectory()}'
-exec-clr program="${xunitPath}" commandline="${assemblyFile}"
+use namespace='System.IO'
+var xunitDllPath1='${Path.Combine(Path.GetDirectoryName(testFile), "xunit.dll")}'
+var xunitDllPath2='${Path.Combine(Path.GetDirectoryName(xunitProgram), "xunit.dll")}'
+
+-// Download xunit from nuget sources if not already present
+test if='!File.Exists(xunitProgram)'
+  exec-clr program='.nuget/NuGet.exe' commandline='install xunit.runners -version ${xunitVersion} -o packages'
+
+-// Copy xunit.dll from test assembly location to xunit exe location (if missing)
+test if='File.Exists(xunitDllPath1) && !File.Exists(xunitDllPath2)'
+  -File.Copy(xunitDllPath1, xunitDllPath2);
+
+
+exec-clr program='${xunitProgram}' commandline='${testFile} ${extra}'
+

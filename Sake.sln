@@ -21,9 +21,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{B84E4C5F-147B-488D-8D69-80EBDB405A79}"
 	ProjectSection(SolutionItems) = preProject
 		build.cmd = build.cmd
-		makefile.shade = makefile.shade
-		packages.config = packages.config
 		build = build
+		Sakefile.shade = Sakefile.shade
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sake.Library", "src\Sake.Library\Sake.Library.csproj", "{2AEB7DA4-82DF-45D2-9991-AF6A47F91ADB}"

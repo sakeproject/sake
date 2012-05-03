@@ -1,0 +1,8 @@
+﻿
+use assembly="Shouldly"
+use namespace="Shouldly"
+use import="Regex"
+
+#test-regex-replace
+  -RegexReplace("hello", "he", "je").ShouldBe("jello");
+  
