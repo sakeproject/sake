@@ -1,0 +1,10 @@
+
+default delete=''
+default create=''
+
+test if="!string.IsNullOrEmpty(delete) && Directory.Exists(delete)"
+  -Directory.Delete(delete, true);
+  
+test if="!string.IsNullOrEmpty(create) && !Directory.Exists(create)"
+  -Directory.CreateDirectory(create);
+  

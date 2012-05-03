@@ -10,6 +10,6 @@
     <file src="*.dll" target="tools" />
     <file src="*.exe" target="tools" />
     <file src="*.exe.config" target="tools" />
-    <file src="Shared/*" target="tools/Shared" />
+    <file src="Shared\*" target="tools/Shared" />
   </files>
 </package>
