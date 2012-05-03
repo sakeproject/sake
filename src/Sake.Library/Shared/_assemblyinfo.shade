@@ -1,16 +1,30 @@
 
 default updateFile=''
+
 default assemblyVersion=''
 default assemblyFileVersion='${assemblyVersion}'
+default assemblyInformationalVersion='${assemblyVersion}'
+default assemblyDescription=''
+default assemblyTitle=''
+default assemblyProduct='${assemblyTitle}'
+default assemblyCopyright=''
 
 use import='Regex'
 
 update-file if='!string.IsNullOrEmpty(updateFile)'
   @{
-    if (!string.IsNullOrWhiteSpace(assemblyVersion))
-      updateText = RegexReplace(updateText, "AssemblyVersion\\([^\\)]*\\)", "AssemblyVersion(\"" + assemblyVersion + "\")");
-      
-    if (!string.IsNullOrWhiteSpace(assemblyFileVersion))
-      updateText = RegexReplace(updateText, "AssemblyFileVersion\\([^\\)]*\\)", "AssemblyFileVersion(\"" + assemblyFileVersion + "\")");
+    System.Action<string, string> __replace__ = (name, value) => 
+    {
+      if (!string.IsNullOrWhiteSpace(value))
+        updateText = RegexReplace(updateText, name + "\\([^\\)]*\\)", name + "(\"" + value + "\")");
+    };
+
+    __replace__("AssemblyVersion", assemblyVersion);
+    __replace__("AssemblyFileVersion", assemblyFileVersion);
+    __replace__("AssemblyInformationalVersion", assemblyInformationalVersion);
+    __replace__("AssemblyTitle", assemblyTitle);
+    __replace__("AssemblyProduct", assemblyProduct);
+    __replace__("AssemblyCopyright", assemblyCopyright);
+    __replace__("AssemblyDescription", assemblyDescription);
   }
 

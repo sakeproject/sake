@@ -6,7 +6,9 @@ use namespace="System"
 use namespace="System.IO"
 use import="Files"
 
-var version='0.1.0-alpha-4'
+var version='0.1.0'
+var versionFull='${version}-alpha-5'
+
 var baseDir='${Directory.GetCurrentDirectory()}'
 var targetDir='${Path.Combine(baseDir, "target")}'
 var testDir='${Path.Combine(targetDir, "test")}'
@@ -20,7 +22,8 @@ var packageDir='${Path.Combine(targetDir, "package")}'
   else
     log info='Already absent: ${targetDir}'
 
-#clean-needed .clean target="compile"
+#update-assemblyinfo target='initialize'
+  assemblyinfo each='var updateFile in Files.Include("src/**/AssemblyInfo.cs")' assemblyVersion='${version}' assemblyInformationalVersion='${versionFull}'
 
 #compile-sake target='compile' description='Compile primary project'
   build projectFile='src/Sake/Sake.csproj' outputDir='${packageDir}'
