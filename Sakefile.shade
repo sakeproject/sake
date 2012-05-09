@@ -40,7 +40,7 @@ var packageDir='${Path.Combine(targetDir, "package")}'
 #run-nuget-pack target='package' description='Create NuGet packages'
   for each='var file in Files.Include("target/package/**/*.nuspec")'
     log info='Packaging ${file}'
-    nuget-pack nuspecFile='${file}' extra='-NoPackageAnalysis -version ${versionFull}' outputDir='${targetDir}'
+    nuget-pack nuspecFile='${file}' packageVersion='${versionFull}' outputDir='${targetDir}' extra='-NoPackageAnalysis'
 
 
 #install-nupkgs target='install' description='Copy NuGet packages to local repo'
