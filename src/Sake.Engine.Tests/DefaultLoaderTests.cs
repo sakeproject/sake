@@ -23,7 +23,7 @@ namespace Sake.Engine.Tests.Loader
         {
             var options = new Options
             {
-                Makefile = Path.Combine("Files", "makefile.shade")
+                Makefile = Path.Combine("Files", "Sakefile.shade")
             };
             var builder = _loader.Load(options);
             builder.ShouldNotBe(null);

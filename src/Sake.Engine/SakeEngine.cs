@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using NDesk.Options;
 using Sake.Engine.Loader;
@@ -41,10 +42,6 @@ namespace Sake.Engine
                 return;
             }
 
-            if (string.IsNullOrEmpty(options.Makefile))
-            {
-                options.Makefile = "makefile.shade";
-            }
 
             var originalDirectory = Directory.GetCurrentDirectory();
             try
@@ -53,6 +50,27 @@ namespace Sake.Engine
                 {
                     Directory.SetCurrentDirectory(changeDirectory);
                 }
+
+                if (string.IsNullOrEmpty(options.Makefile))
+                {
+                    if (File.Exists("Sakefile.shade"))
+                    {
+                        options.Makefile = "Sakefile.shade";
+                    }
+                    else
+                    {
+                        var files = Directory.GetFiles(".", "*.shade").Where(name => !Path.GetFileName(name).StartsWith("_"));
+                        if (files.Count() == 1)
+                        {
+                            options.Makefile = files.Single();
+                        }
+                    }
+                }
+                if (string.IsNullOrEmpty(options.Makefile))
+                {
+                    throw new Exception("Sakefile.shade not found, and directory did not contain single .shade file. -f option must be provided.");
+                }
+
 
                 var builder = _loader.Load(options);
 

@@ -1,0 +1,7 @@
+﻿
+#single-file
+  ='ShouldUseSingleShadeFileAsDefault'
+  not-this-one
+  or-this-one
+
+

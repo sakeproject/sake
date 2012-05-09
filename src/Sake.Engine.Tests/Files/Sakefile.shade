@@ -1,0 +1,7 @@
+﻿
+#Default .Another
+  ="ExecDefault"
+  ="This is Files\\makefile.shade"
+  
+#Another
+  ="ExecAnother"

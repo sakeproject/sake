@@ -82,5 +82,15 @@ namespace Sake.Engine.Tests
             _engine.Execute("-C", "Files", "-f", "ShouldLoadFilesFromIncludeDir.shade", "-I", "AnotherFolder");
             Output.ShouldContain("WasFoundInAnotherFolder");
         }
+
+
+        [Fact]
+        public void ShouldUseSingleShadeFileAsDefault()
+        {
+            _engine.Execute("-C", "Files", "-C", "SingleFile");
+            Output.ShouldContain("ShouldUseSingleShadeFileAsDefault");
+            Output.ShouldContain("NotThisOne");
+            Output.ShouldContain("OrThisOne");
+        }
     }
 }
