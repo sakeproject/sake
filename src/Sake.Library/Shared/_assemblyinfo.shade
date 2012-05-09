@@ -14,9 +14,9 @@ use import='Regex'
 update-file if='!string.IsNullOrEmpty(updateFile)'
   @{
     System.Action<string, string> __replace__ = (name, value) => 
-    {
+    { 
       if (!string.IsNullOrWhiteSpace(value))
-        updateText = RegexReplace(updateText, name + "\\([^\\)]*\\)", name + "(\"" + value + "\")");
+        updateText = RegexReplace(updateText, name + @"\(""([^""\\]|\\.)*""\)", name + "(\"" + value + "\")");
     };
 
     __replace__("AssemblyVersion", assemblyVersion);

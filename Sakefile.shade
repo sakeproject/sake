@@ -16,14 +16,12 @@ var packageDir='${Path.Combine(targetDir, "package")}'
 
 
 #delete-target-folder target="clean"
-  test if='Directory.Exists(targetDir)'
-    log info='Deleting: ${targetDir}'
-    -Directory.Delete(targetDir, true);
-  else
-    log info='Already absent: ${targetDir}'
+  directory delete="${targetDir}"
+
 
 #update-assemblyinfo target='initialize'
   assemblyinfo each='var updateFile in Files.Include("src/**/AssemblyInfo.cs")' assemblyVersion='${version}' assemblyInformationalVersion='${versionFull}'
+
 
 #compile-sake target='compile' description='Compile primary project'
   build projectFile='src/Sake/Sake.csproj' outputDir='${packageDir}'
@@ -35,7 +33,6 @@ var packageDir='${Path.Combine(targetDir, "package")}'
 
 
 #run-xunit target="test" description='Run xunit tests'
-  -//copy sourceDir='${testDir}' include='xunit.dll' outputDir='packages/xunit.runners.1.9.0.1566/tools' overwrite='${true}'
   for each='var file in Files.BasePath(testDir).Include("*.Tests.dll", "Sake.Library.exe")'
     xunit testFile='${Path.Combine(testDir, file)}'
 
@@ -43,7 +40,7 @@ var packageDir='${Path.Combine(targetDir, "package")}'
 #run-nuget-pack target='package' description='Create NuGet packages'
   for each='var file in Files.Include("target/package/**/*.nuspec")'
     log info='Packaging ${file}'
-    nuget-pack nuspecFile='${file}' extra='-NoPackageAnalysis' outputDir='${targetDir}'
+    nuget-pack nuspecFile='${file}' extra='-NoPackageAnalysis -version ${versionFull}' outputDir='${targetDir}'
 
 
 #install-nupkgs target='install' description='Copy NuGet packages to local repo'
