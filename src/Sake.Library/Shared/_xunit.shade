@@ -27,7 +27,7 @@ var xunitDllPath2='${Path.Combine(Path.GetDirectoryName(xunitProgram), "xunit.dl
 
 -// Download xunit from nuget sources if not already present
 test if='!File.Exists(xunitProgram)'
-  nuget-install package='xunit.runners' version='${xunitVersion}' outputDir='packages'
+  nuget-install package='xunit.runners' packageVersion='${xunitVersion}' outputDir='packages'
 
 -// Copy xunit.dll from test assembly location to xunit exe location (if missing)
 test if='File.Exists(xunitDllPath1) && !File.Exists(xunitDllPath2)'
