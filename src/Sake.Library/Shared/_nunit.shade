@@ -4,7 +4,7 @@ default extra=''
 
 -// Download nunit from nuget sources if not already present
 test if='!System.IO.File.Exists(nunitProgram)'
-  exec-clr program='.nuget/NuGet.exe' commandline='install NUnit -version ${nunitVersion} -o packages'
+  nuget-install package='NUnit' version='${nunitVersion}' outputDir='packages'
 
 exec-clr program='${nunitProgram}' commandline='${testFile} ${extra}'
 
