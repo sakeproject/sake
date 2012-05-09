@@ -1,3 +1,21 @@
+@{/*
+
+xunit 
+    Run unit tests in your project. Downloads and executes xunit console runner.
+
+testFile='' 
+    Required. Path to the test assembly to execute 
+
+extra=''
+    Additional commandline parameters for xunit
+
+xunitVersion='1.9.0.1566'
+    May be passed to override the nuget package version holding xunit console runner.
+
+xunitProgram='packages/xunit.runners.${xunitVersion}/tools/xunit.console.clr4.exe'
+    May be passed to override the path to the xunit program that will be executed
+
+*/}
 
 default xunitVersion='1.9.0.1566'
 default xunitProgram='packages/xunit.runners.${xunitVersion}/tools/xunit.console.clr4.exe'

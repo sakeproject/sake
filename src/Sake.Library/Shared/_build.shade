@@ -1,3 +1,21 @@
+@{/*
+
+build 
+    Executes msbuild or xbuild to compile your project or solution
+
+projectFile='' 
+    Required. Path to the project or solution file to build.
+
+configuration='Release'
+    Determines which configuration to use when building.
+
+outputDir=''
+    Directs all compiler outputs into the target path.
+
+extra=''
+    Additional commandline parameters for msbuild or xbuild
+
+*/}
 
 default configuration='Release'
 default outputDir=''
@@ -21,4 +39,4 @@ var buildProgram=''
 var OutDirProperty=''
 set OutDirProperty='OutDir=${outputDir}${Path.DirectorySeparatorChar};' if='!string.IsNullOrWhiteSpace(outputDir)'
 
-exec program="${buildProgram}" commandline='${projectFile} "/p:${OutDirProperty}Configuration=${configuration}"'
+exec program="${buildProgram}" commandline='${projectFile} "/p:${OutDirProperty}Configuration=${configuration}" ${extra}'
