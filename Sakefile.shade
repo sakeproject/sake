@@ -7,7 +7,7 @@ use namespace="System.IO"
 use import="Files"
 
 var version='0.1.0'
-var versionFull='${version}-alpha-6'
+var versionFull='${version}-alpha-7'
 
 var baseDir='${Directory.GetCurrentDirectory()}'
 var targetDir='${Path.Combine(baseDir, "target")}'
