@@ -2,7 +2,6 @@
 default nugetPath='.nuget/NuGet.exe'
 default configuration='Release'
 
-default workingdir='${Directory.GetCurrentDirectory()}'
 default outputDir=''
 default version=''
 default extra=''

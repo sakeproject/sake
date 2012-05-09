@@ -1,7 +1,6 @@
 
 default nugetPath='.nuget/NuGet.exe'
 
-default workingdir='${Directory.GetCurrentDirectory()}'
 default apiKey='${Environment.GetEnvironmentVariable("APIKEY")}'
 default extra=''
 
