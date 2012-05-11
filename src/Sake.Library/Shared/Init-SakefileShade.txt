@@ -1,0 +1,26 @@
+use-standard-lifecycle
+use namespace="System"
+use namespace="System.IO"
+use import="Files"
+
+var PROJECT='%CWD%'
+var VERSION='0.0.1'
+var FULL_VERSION='${VERSION}'
+var AUTHORS='${PROJECT} contributors'
+
+var BASE_DIR='${Directory.GetCurrentDirectory()}'
+var TARGET_DIR='${Path.Combine(BASE_DIR, "target")}'
+var BUILD_DIR='${Path.Combine(TARGET_DIR, "build")}'
+var TEST_DIR='${Path.Combine(TARGET_DIR, "test")}'
+var PACKAGE_DIR='${Path.Combine(TARGET_DIR, "package")}'
+
+var HOME_DIR='${Environment.GetEnvironmentVariable("HOME")}'
+set HOME_DIR='${Environment.GetEnvironmentVariable("HOMEDRIVE") + Environment.GetEnvironmentVariable("HOMEPATH")}' if='string.IsNullOrEmpty(HOME_DIR)'
+
+#clean-target-dir target='clean'
+  directory delete='${TARGET_DIR}'
+
+#apply-version
+  for each='var file in Files.Include("src/**/AssemblyInfo.cs")'
+    assemblyinfo updateFile='${file}' assemblyVersion='${VERSION}' assemblyInformationalVersion='${FULL_VERSION}'
+

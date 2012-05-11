@@ -60,15 +60,8 @@ namespace Sake.Engine
                     else
                     {
                         var files = Directory.GetFiles(".", "*.shade").Where(name => !Path.GetFileName(name).StartsWith("_"));
-                        if (files.Count() == 1)
-                        {
-                            options.Makefile = files.Single();
-                        }
+                        options.Makefile = files.Count() == 1 ? files.Single() : "Sakefile.shade";
                     }
-                }
-                if (string.IsNullOrEmpty(options.Makefile))
-                {
-                    throw new Exception("Sakefile.shade not found, and directory did not contain single .shade file. -f option must be provided.");
                 }
 
 
