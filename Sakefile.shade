@@ -1,56 +1,29 @@
 
+var VERSION='0.1.1'
+var FULL_VERSION='${VERSION}-alpha-9'
 
-use-standard-lifecycle
+var BASE_DIR='${Directory.GetCurrentDirectory()}'
+var TARGET_DIR='${Path.Combine(BASE_DIR, "target")}'
+var BUILD_DIR='${Path.Combine(TARGET_DIR, "build")}'
+var TEST_DIR='${Path.Combine(TARGET_DIR, "test")}'
+
+var ASSEMBLYINFO_FILES='${Files.Include("src/**/AssemblyInfo.cs")}'
+var BUILD_PROJECTS='${Files.Include("src/**/*.csproj")}'
+var TEST_PROJECTS='${Files.Include("src/**/*.Tests.csproj")}'
+
+var TEST_ASSEMBLIES='${Files.Include("target/test/**/*.Tests.dll")}'
+var NUSPEC_FILES='${Files.Include("target/build/**/*.nuspec")}'
+
 
 use namespace="System"
 use namespace="System.IO"
 use import="Files"
 
-var version='0.1.0'
-var versionFull='${version}-alpha-8'
-
-var baseDir='${Directory.GetCurrentDirectory()}'
-var targetDir='${Path.Combine(baseDir, "target")}'
-var testDir='${Path.Combine(targetDir, "test")}'
-var packageDir='${Path.Combine(targetDir, "package")}'
+use-standard-lifecycle
+use-standard-goals features='xunit,nuget'
 
 
-#delete-target-folder target="clean"
-  directory delete="${targetDir}"
-
-
-#update-assemblyinfo target='initialize'
-  assemblyinfo each='var updateFile in Files.Include("src/**/AssemblyInfo.cs")' assemblyVersion='${version}' assemblyInformationalVersion='${versionFull}'
-
-
-#compile-sake target='compile' description='Compile primary project'
-  build projectFile='src/Sake/Sake.csproj' outputDir='${packageDir}'
-  copy sourceDir='src/Sake.Library/Shared' outputDir='${packageDir}/Shared' overwrite='${true}'
-  copy sourceDir='src/Sake.Library/Init' outputDir='${packageDir}' overwrite='${true}'
-
-
-#compile-for-xunit target='test-compile' description='Compile entire solution for testing'
-  build projectFile='Sake.sln' outputDir='${testDir}'
-
-
-#run-xunit target="test" description='Run xunit tests'
-  for each='var file in Files.BasePath(testDir).Include("*.Tests.dll", "Sake.Library.exe")'
-    xunit testFile='${Path.Combine(testDir, file)}'
-
-
-#run-nuget-pack target='package' description='Create NuGet packages'
-  for each='var file in Files.Include("target/package/**/*.nuspec")'
-    log info='Packaging ${file}'
-    nuget-pack nuspecFile='${file}' packageVersion='${version}' outputDir='${targetDir}' extra='-NoPackageAnalysis'
-
-
-#install-nupkgs target='install' description='Copy NuGet packages to local repo'
-  var outputDir='${Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%\\.nuget")}'
-  copy sourceDir='${targetDir}' include='*.nupkg' overwrite='${true}'
-
-
-#push-nupkgs target='deploy' description='Upload NuGet packages to gallery'
-  nuget-push each='var nupkgFile in Files.Include("target/*.nupkg")'
-
-
+#add-files-for-packaging target='package-prepare'
+  copy sourceDir='src/Sake.Library/Init' outputDir='${BUILD_DIR}/Sake' overwrite='${true}'
+  copy sourceDir='src/Sake.Library/Shared' outputDir='${BUILD_DIR}/Sake/Shared' overwrite='${true}'
 
