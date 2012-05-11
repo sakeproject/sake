@@ -14,10 +14,9 @@ default BUILD_DIR='${Path.Combine(TARGET_DIR, "build")}'
 default TEST_DIR='${Path.Combine(TARGET_DIR, "test")}'
 
 default SRC='src'
-default ASSEMBLYINFO_FILES='${not_provided}'
-default ASSEMBLYINFO_FILES='${Files.Include("${SRC}/**/AssemblyInfo.cs")}'
-default BUILD_PROJECTS='${Files.Include("${SRC}/**/*.csproj")}'
-default TEST_PROJECTS='${Files.Include("${SRC}/**/*.Tests.csproj")}'
+default ASSEMBLYINFO_FILES='${Files.Include(SRC+"/**/AssemblyInfo.cs")}'
+default BUILD_PROJECTS='${Files.Include(SRC+"/**/*.csproj")}'
+default TEST_PROJECTS='${Files.Include(SRC+"/**/*.Tests.csproj")}'
 
 default TEST_ASSEMBLIES='${Files.Include("target/test/**/*.Tests.dll")}'
 default NUSPEC_FILES='${Files.Include("target/build/**/*.nuspec")}'

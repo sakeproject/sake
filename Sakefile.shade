@@ -7,18 +7,6 @@ var TARGET_DIR='${Path.Combine(BASE_DIR, "target")}'
 var BUILD_DIR='${Path.Combine(TARGET_DIR, "build")}'
 var TEST_DIR='${Path.Combine(TARGET_DIR, "test")}'
 
-var ASSEMBLYINFO_FILES='${Files.Include("src/**/AssemblyInfo.cs")}'
-var BUILD_PROJECTS='${Files.Include("src/**/*.csproj")}'
-var TEST_PROJECTS='${Files.Include("src/**/*.Tests.csproj")}'
-
-var TEST_ASSEMBLIES='${Files.Include("target/test/**/*.Tests.dll")}'
-var NUSPEC_FILES='${Files.Include("target/build/**/*.nuspec")}'
-
-
-use namespace="System"
-use namespace="System.IO"
-use import="Files"
-
 use-standard-lifecycle
 use-standard-goals features='xunit,nuget'
 
