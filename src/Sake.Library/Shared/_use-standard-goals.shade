@@ -51,7 +51,8 @@ default TEST_ASSEMBLIES='${Files.Include("target/test/**/*.Tests.dll")}'
 
 #nuget-package target='package' description='Create NuGet packages' if='HasFeature("nuget")'
   for each='var file in Files.Include("target/build/**/*.nuspec")'
-    nuget-pack nuspecFile='${file}' packageVersion='${FULL_VERSION}' outputDir='${TARGET_DIR}' extra='-NoPackageAnalysis'
+    var baseName='${Path.GetFileNameWithoutExtension(file)}'
+    nuget-pack nuspecFile='${file}' packageVersion='${FULL_VERSION}' outputDir='${TARGET_DIR}' extra='-NoPackageAnalysis -Properties "id=${baseName};authors=${AUTHORS}"'
 
 
 #nuget-install target='install' description='Copy NuGet packages to local repo' if='HasFeature("nuget")'
