@@ -17,9 +17,7 @@ default SRC='src'
 default ASSEMBLYINFO_FILES='${Files.Include(SRC+"/**/AssemblyInfo.cs")}'
 default BUILD_PROJECTS='${Files.Include(SRC+"/**/*.csproj")}'
 default TEST_PROJECTS='${Files.Include(SRC+"/**/*.Tests.csproj")}'
-
 default TEST_ASSEMBLIES='${Files.Include("target/test/**/*.Tests.dll")}'
-default NUSPEC_FILES='${Files.Include("target/build/**/*.nuspec")}'
 
 
 #target-dir-clean target="clean"
@@ -63,6 +61,4 @@ default NUSPEC_FILES='${Files.Include("target/build/**/*.nuspec")}'
 
 
 #nuget-deploy target='deploy' description='Upload NuGet packages to gallery' if='HasFeature("nuget")'
-  nuget-push each='var nupkgFile in NUSPEC_FILES'
-
-
+  nuget-push each='var nupkgFile in Files.Include("target/*.nupkg")'
