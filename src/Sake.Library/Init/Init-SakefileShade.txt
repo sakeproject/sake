@@ -20,7 +20,10 @@ set HOME_DIR='${Environment.GetEnvironmentVariable("HOMEDRIVE") + Environment.Ge
 #clean-target-dir target='clean'
   directory delete='${TARGET_DIR}'
 
-#apply-version
+#apply-version target='initialize'
   for each='var file in Files.Include("src/**/AssemblyInfo.cs")'
     assemblyinfo updateFile='${file}' assemblyVersion='${VERSION}' assemblyInformationalVersion='${FULL_VERSION}'
+
+#build-sln target='compile'
+  build projectFile='${PROJECT}.sln' outputDir='${BUILD_DIR}' configuration='Release'
 

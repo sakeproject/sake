@@ -7,7 +7,7 @@ use namespace="System.IO"
 use import="Files"
 
 var version='0.1.0'
-var versionFull='${version}-alpha-7'
+var versionFull='${version}-alpha-8'
 
 var baseDir='${Directory.GetCurrentDirectory()}'
 var targetDir='${Path.Combine(baseDir, "target")}'
@@ -26,6 +26,7 @@ var packageDir='${Path.Combine(targetDir, "package")}'
 #compile-sake target='compile' description='Compile primary project'
   build projectFile='src/Sake/Sake.csproj' outputDir='${packageDir}'
   copy sourceDir='src/Sake.Library/Shared' outputDir='${packageDir}/Shared' overwrite='${true}'
+  copy sourceDir='src/Sake.Library/Init' outputDir='${packageDir}' overwrite='${true}'
 
 
 #compile-for-xunit target='test-compile' description='Compile entire solution for testing'
@@ -40,7 +41,7 @@ var packageDir='${Path.Combine(targetDir, "package")}'
 #run-nuget-pack target='package' description='Create NuGet packages'
   for each='var file in Files.Include("target/package/**/*.nuspec")'
     log info='Packaging ${file}'
-    nuget-pack nuspecFile='${file}' packageVersion='${versionFull}' outputDir='${targetDir}' extra='-NoPackageAnalysis'
+    nuget-pack nuspecFile='${file}' packageVersion='${version}' outputDir='${targetDir}' extra='-NoPackageAnalysis'
 
 
 #install-nupkgs target='install' description='Copy NuGet packages to local repo'

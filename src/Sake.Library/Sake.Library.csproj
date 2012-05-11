@@ -65,16 +65,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <Content Include="Shared\Init-BuildSh.txt">
+    <Content Include="Init\Init-BuildSh.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Shared\Init-BuildCmd.txt">
+    <Content Include="Init\Init-BuildCmd.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Shared\Init-SakefileShade.txt">
+    <Content Include="Init\Init-SakefileShade.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Shared\Sakefile.shade">
+    <None Include="Init\Sakefile.shade">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Shared\_nuget-install.shade">
