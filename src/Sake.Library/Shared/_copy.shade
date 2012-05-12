@@ -7,7 +7,7 @@ default overwrite='${false}'
 
 
 @{
-  var copyFiles = Files.BasePath(sourceDir);
+  var copyFiles = Files.BasePath(Path.GetFullPath(sourceDir));
   if (!string.IsNullOrEmpty(include))
   {
     copyFiles = copyFiles.Include(include);
