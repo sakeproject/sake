@@ -13,7 +13,7 @@ default TARGET_DIR='${Path.Combine(BASE_DIR, "target")}'
 default BUILD_DIR='${Path.Combine(TARGET_DIR, "build")}'
 default TEST_DIR='${Path.Combine(TARGET_DIR, "test")}'
 
-default SRC='src'
+default SRC='.'
 default ASSEMBLYINFO_FILES='${Files.Include(SRC+"/**/AssemblyInfo.cs")}'
 default BUILD_PROJECTS='${Files.Include(SRC+"/**/*.csproj")}'
 default TEST_PROJECTS='${Files.Include(SRC+"/**/*.Tests.csproj")}'
