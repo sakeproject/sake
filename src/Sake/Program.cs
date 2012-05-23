@@ -17,7 +17,7 @@ namespace Sake
             {
                 Output = new ConsoleWriter()
             };
-            
+
             using (var container = CreateContainer(settings))
             {
                 var engine = container.Resolve<SakeEngine>();
@@ -27,7 +27,9 @@ namespace Sake
                 }
                 catch (Exception ex)
                 {
-                    container.Resolve<ILog>().Warn(ex.Message + Environment.NewLine + ex.StackTrace);
+                    container.Resolve<ILog>().Warn(ex.Message);
+                    container.Resolve<ILog>().Verbose("Stack trace: " + Environment.NewLine + ex.StackTrace);
+                    Environment.ExitCode = 1;
                 }
             }
         }
