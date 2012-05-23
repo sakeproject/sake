@@ -1,5 +1,5 @@
 
-var VERSION='0.1.3'
+var VERSION='0.1.4'
 var FULL_VERSION='${VERSION}'
 var AUTHORS='Sake contributors'
 
