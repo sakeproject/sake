@@ -92,5 +92,11 @@ namespace Sake.Engine.Tests
             Output.ShouldContain("NotThisOne");
             Output.ShouldContain("OrThisOne");
         }
+
+        [Fact]
+        public void ShouldBeAbleToLoadEmptyFile()
+        {
+            _engine.Execute("-C", "Files", "-C", "EmptyFile");
+        }
     }
 }
