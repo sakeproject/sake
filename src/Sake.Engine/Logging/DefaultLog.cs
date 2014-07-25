@@ -21,6 +21,11 @@ namespace Sake.Engine.Logging
             _settings.Output.WriteLine("\x1b-\x0ewarn\x1b-\x07: {0}", value);
         }
 
+        public void Error(object value)
+        {
+            _settings.Output.WriteLine("\x1b-\u20cfail\x1b-\x07: {0}", value);
+        }
+
         public void Verbose(object value)
         {
             _settings.Output.WriteLine("\x1b-\x03verbose\x1b-\x07: {0}", value);

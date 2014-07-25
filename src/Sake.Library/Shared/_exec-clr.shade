@@ -18,22 +18,50 @@ log info="  workingdir: ${workingdir}"
         FileName = program,
         Arguments = commandline
     };
-    
+
     if (IsMono)
     {
     	processStartInfo.Arguments =
     		"--runtime=v4.0 " +
     		processStartInfo.FileName +
-    		" " + 
+        	" " +
     		processStartInfo.Arguments;
     	processStartInfo.FileName = "mono";
     }
 
-    var process = Process.Start(processStartInfo);
-    process.WaitForExit();
-    if (process.ExitCode != 0)
+    if (__WriteExecOutputToLogger)
     {
-        throw new Exception(string.Format("Exit code {0} from {1}", process.ExitCode, program));
+        processStartInfo.RedirectStandardError = true;
+        processStartInfo.RedirectStandardOutput = true;
+    }
+
+    using (var process = Process.Start(processStartInfo))
+    {
+        if (__WriteExecOutputToLogger)
+        {
+            process.EnableRaisingEvents = true;
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            process.ErrorDataReceived += (sender, eventArgs) =>
+            {
+                if (!string.IsNullOrWhiteSpace(eventArgs.Data))
+                {
+                    Log.Error(eventArgs.Data);
+                }
+            };
+
+            process.OutputDataReceived += (sender, eventArgs) =>
+            {
+                Log.Info(eventArgs.Data);
+            };
+        }
+
+        process.WaitForExit();
+        if (process.ExitCode != 0)
+        {
+            throw new Exception(string.Format("Exit code {0} from {1}", process.ExitCode, program));
+        }
     }
 }
 

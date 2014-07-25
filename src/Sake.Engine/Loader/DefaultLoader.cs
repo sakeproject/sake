@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Text;
+using System.Reflection;
 using Sake.Engine.Builder;
 using Sake.Engine.Logging;
 using Spark;
@@ -11,10 +11,12 @@ namespace Sake.Engine.Loader
     public class DefaultLoader : ILoader
     {
         private readonly ILog _log;
+        private readonly ISakeSettings _settings;
 
-        public DefaultLoader(ILog log)
+        public DefaultLoader(ILog log, ISakeSettings settings)
         {
             _log = log;
+            _settings = settings;
         }
 
         public IBuilder Load(Options options)
@@ -31,8 +33,20 @@ namespace Sake.Engine.Loader
             IViewFolder viewFolder = new FileSystemViewFolder(currentDirectory);
             foreach(var includeDir in options.IncludeDirectory)
             {
-                viewFolder = new CombinedViewFolder(viewFolder, new FileSystemViewFolder(Path.Combine(currentDirectory, includeDir)));
+                var path = Path.Combine(currentDirectory, includeDir);
+                viewFolder = new CombinedViewFolder(viewFolder, new FileSystemViewFolder(path));
+                foreach (var file in Directory.EnumerateFiles(path, "*.dll"))
+                {
+                    try
+                    {
+                        Assembly.LoadFile(file);
+                    }
+                    catch
+                    {
+                    }
+                }
             }
+
             viewFolder = new CombinedViewFolder(viewFolder, new FileSystemViewFolder(assemblyDirectory));
 
             var engine = new SparkViewEngine(settings)
@@ -49,6 +63,7 @@ namespace Sake.Engine.Loader
             var builder = (BuilderBase)engine.CreateInstance(descriptor);
             builder.Output = new StringWriter();
             builder.Log = _log;
+            builder.SakeSettings = _settings;
             builder.Render();
             return builder;
         }

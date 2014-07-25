@@ -16,7 +16,8 @@ namespace Sake.Library
         public override IEnumerable<object[]> GetData(MethodInfo methodUnderTest, Type[] parameterTypes)
         {
             var makefiles = Directory.GetFiles(Directory.GetCurrentDirectory(), "test-*.shade").Select(Path.GetFileName);
-            var loader = new DefaultLoader(new DefaultLog(new SakeSettings { Output = Console.Out }));
+            var settings = new SakeSettings { Output = Console.Out };
+            var loader = new DefaultLoader(new DefaultLog(settings), settings);
             foreach (var makefile in makefiles)
             {
                 IBuilder builder;

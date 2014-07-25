@@ -1,10 +1,12 @@
 @echo off
 cd %~dp0
 
+setlocal
 set EnableNuGetPackageRestore=true
-".nuget\NuGet.exe" install Sake -pre -o packages
+set Configuration=Release
 
-for /f "tokens=*" %%G in ('dir /AD /ON /B "packages\Sake.*"') do set __sake__=%%G
-"packages\%__sake__%\tools\Sake.exe" -I src\Sake.Library\Shared %*
+msbuild /fl /v:Q Sake.sln
+
+src\Sake\bin\%Configuration%\sake.exe -I src\Sake.Library\Shared %*
 set __sake__=
 
