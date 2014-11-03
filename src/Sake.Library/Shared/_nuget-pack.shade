@@ -20,7 +20,7 @@ nugetPath='.nuget/NuGet.exe'
 
 */}
 
-default nugetPath='.nuget/NuGet.exe'
+default nugetPath='.nuget/nuget.exe'
 
 default outputDir=''
 default packageVersion=''

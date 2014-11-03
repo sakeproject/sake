@@ -1,5 +1,5 @@
 
-default nugetPath='.nuget/NuGet.exe'
+default nugetPath='.nuget/nuget.exe'
 
 default apiKey='${Environment.GetEnvironmentVariable("APIKEY")}'
 default extra=''
