@@ -10,6 +10,8 @@ namespace Sake.Engine.Builder
     {
         private readonly IDictionary<string, Target> _targets = new Dictionary<string, Target>();
 
+        private string _previousTarget;
+
         public IDictionary<string, Target> Targets
         {
             get { return _targets; }
@@ -49,13 +51,14 @@ namespace Sake.Engine.Builder
             }
         }
 
-        public void StartingTarget(string name)
+        public virtual void StartingTarget(string name)
         {
             foreach (var dependency in Targets[name].Dependencies)
             {
                 CallTarget(dependency);
             }
-            Log.Info(string.Format("Target \x1b-\x0f{0}\x1b-\x07", name));
+
+            _previousTarget = name;
         }
 
         public void CallTarget(string name)
@@ -80,6 +83,8 @@ namespace Sake.Engine.Builder
         }
 
         public ILog Log { get; set; }
+
+        public ISakeSettings SakeSettings { get; set; }
     }
 
     public abstract class BuilderBase : BuilderBase<object>

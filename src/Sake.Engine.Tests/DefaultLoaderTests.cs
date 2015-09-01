@@ -15,7 +15,7 @@ namespace Sake.Engine.Tests.Loader
         public DefaultLoaderTests()
         {
             _settings = new SakeSettings { Output = new StringWriter() };
-            _loader = new DefaultLoader(new DefaultLog(_settings));
+            _loader = new DefaultLoader(new DefaultLog(_settings), _settings);
         }
 
         [Fact]

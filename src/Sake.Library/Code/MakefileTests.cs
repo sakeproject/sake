@@ -13,7 +13,8 @@ namespace Sake.Library
         public void MakefileTarget(string makefile, string target)
         {
             var settings = new SakeSettings { Output = new RemoveEscapes(Console.Out) };
-            var engine = new SakeEngine(settings, new DefaultLoader(new DefaultLog(settings)), new DefaultRunner());
+            var loader = new DefaultLoader(new DefaultLog(settings), settings);
+            var engine = new SakeEngine(settings, loader, new DefaultRunner());
             engine.Execute(new Options { Makefile = makefile, Targets = new[] { target } });
         }
     }

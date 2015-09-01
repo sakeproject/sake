@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
 using Autofac;
 using Sake.Engine;
 using Sake.Engine.Loader;
@@ -15,7 +13,7 @@ namespace Sake
         {
             var settings = new SakeSettings
             {
-                Output = new ConsoleWriter()
+                Output = new ConsoleWriter(),
             };
 
             using (var container = CreateContainer(settings))
@@ -27,8 +25,8 @@ namespace Sake
                 }
                 catch (Exception ex)
                 {
-                    container.Resolve<ILog>().Warn(ex.Message);
-                    container.Resolve<ILog>().Verbose("Stack trace: " + Environment.NewLine + ex.StackTrace);
+                    container.Resolve<ILog>().Error(ex.Message);
+                    container.Resolve<ILog>().Error("Stack trace: " + Environment.NewLine + ex.StackTrace);
                     Environment.ExitCode = 1;
                 }
             }

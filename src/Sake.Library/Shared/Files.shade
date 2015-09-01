@@ -64,7 +64,7 @@ functions
         IEnumerable<string> Scan()
         {
             var exclude = _exclude
-                .SelectMany(pattern => PathResolver.PerformWildcardSearch(_basePath, pattern))
+                .SelectMany(PerformSearch)
                 .Distinct()
                 .ToList();
 
@@ -75,13 +75,22 @@ functions
             }
 
             var files = include
-                .SelectMany(pattern => PathResolver.PerformWildcardSearch(_basePath, pattern))
+                .SelectMany(PerformSearch)
                 .Distinct()
                 .Where(path => !exclude.Contains(path))
                 .Select(path => {if (path.StartsWith(_basePath)) {return path.Substring(_basePath.Length + 1);} return path;})
                 .ToList();
 
             return files;
+        }
+
+        IEnumerable<string> PerformSearch(string pattern)
+        {
+            if (pattern.StartsWith(_basePath))
+            {
+                return PathResolver.PerformWildcardSearch(_basePath, pattern.Substring(_basePath.Length + 1));
+            }
+            return PathResolver.PerformWildcardSearch(_basePath, pattern);
         }
     }
  }
