@@ -67,6 +67,9 @@
     <None Include="Files\AnotherFolder\FromAnotherFolder.shade">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Files\EmptyFile\EmptySakefile.shade">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Files\ShouldLoadFilesFromIncludeDir.shade">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
